@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
 
   const scrollToSection = (section) => {
     setActiveSection(section);
     setIsMenuOpen(false); // Close the menu after clicking a link
-    document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(section).scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       {/* Navbar */}
       <nav className="sticky top-0 bg-white shadow-md z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">My Portfolio</h1>
+          <h1 className="text-2xl font-bold text-blue-600">Harmo</h1>
 
           {/* Hamburger Menu Button (visible on small screens) */}
           <button
@@ -42,32 +42,44 @@ export default function Home() {
           <ul className="hidden lg:flex space-x-6">
             <li>
               <button
-                onClick={() => scrollToSection('home')}
-                className={`text-lg font-medium ${activeSection === 'home' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600`}
+                onClick={() => scrollToSection("home")}
+                className={`text-lg font-medium ${
+                  activeSection === "home" ? "text-blue-600" : "text-gray-700"
+                } hover:text-blue-600`}
               >
                 Home
               </button>
             </li>
             <li>
               <button
-                onClick={() => scrollToSection('about')}
-                className={`text-lg font-medium ${activeSection === 'about' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600`}
+                onClick={() => scrollToSection("about")}
+                className={`text-lg font-medium ${
+                  activeSection === "about" ? "text-blue-600" : "text-gray-700"
+                } hover:text-blue-600`}
               >
                 About
               </button>
             </li>
             <li>
               <button
-                onClick={() => scrollToSection('portfolio')}
-                className={`text-lg font-medium ${activeSection === 'portfolio' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600`}
+                onClick={() => scrollToSection("portfolio")}
+                className={`text-lg font-medium ${
+                  activeSection === "portfolio"
+                    ? "text-blue-600"
+                    : "text-gray-700"
+                } hover:text-blue-600`}
               >
                 Portfolio
               </button>
             </li>
             <li>
               <button
-                onClick={() => scrollToSection('contact')}
-                className={`text-lg font-medium ${activeSection === 'contact' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600`}
+                onClick={() => scrollToSection("contact")}
+                className={`text-lg font-medium ${
+                  activeSection === "contact"
+                    ? "text-blue-600"
+                    : "text-gray-700"
+                } hover:text-blue-600`}
               >
                 Contact
               </button>
@@ -81,32 +93,46 @@ export default function Home() {
             <ul className="flex flex-col space-y-4 p-6">
               <li>
                 <button
-                  onClick={() => scrollToSection('home')}
-                  className={`text-lg font-medium ${activeSection === 'home' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600`}
+                  onClick={() => scrollToSection("home")}
+                  className={`text-lg font-medium ${
+                    activeSection === "home" ? "text-blue-600" : "text-gray-700"
+                  } hover:text-blue-600`}
                 >
                   Home
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection('about')}
-                  className={`text-lg font-medium ${activeSection === 'about' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600`}
+                  onClick={() => scrollToSection("about")}
+                  className={`text-lg font-medium ${
+                    activeSection === "about"
+                      ? "text-blue-600"
+                      : "text-gray-700"
+                  } hover:text-blue-600`}
                 >
                   About
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection('portfolio')}
-                  className={`text-lg font-medium ${activeSection === 'portfolio' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600`}
+                  onClick={() => scrollToSection("portfolio")}
+                  className={`text-lg font-medium ${
+                    activeSection === "portfolio"
+                      ? "text-blue-600"
+                      : "text-gray-700"
+                  } hover:text-blue-600`}
                 >
                   Portfolio
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => scrollToSection('contact')}
-                  className={`text-lg font-medium ${activeSection === 'contact' ? 'text-blue-600' : 'text-gray-700'} hover:text-blue-600`}
+                  onClick={() => scrollToSection("contact")}
+                  className={`text-lg font-medium ${
+                    activeSection === "contact"
+                      ? "text-blue-600"
+                      : "text-gray-700"
+                  } hover:text-blue-600`}
                 >
                   Contact
                 </button>
@@ -117,33 +143,66 @@ export default function Home() {
       </nav>
 
       {/* Home Section */}
-      <section id="home" className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-4xl font-bold text-blue-600">Welcome to My Portfolio!</h1>
-        <p className="mt-4 text-lg text-gray-700">This is the home section of my single-page application.</p>
-        <button
-          onClick={() => scrollToSection('about')}
-          className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-        >
-          Learn More About Me
-        </button>
+      <section
+        id="home"
+        className="flex flex-col items-center justify-center min-h-screen"
+      >
+        <div className="container mx-auto px-4">
+          {/* First Div: Two Columns for Image and H1 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+            {/* Column 1: Image */}
+            <div className="flex justify-center">
+              <img
+                src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8a2lkfGVufDB8fDB8fHww"
+                alt="Profile"
+                className="w-48 h-48 object-cover rounded-full shadow-lg"
+              />
+            </div>
+            {/* Column 2: H1 */}
+            <div className="flex flex-col justify-center items-start">
+              <h1 className="text-4xl font-bold text-blue-600">
+                Hi, I'm Harmo
+              </h1>
+            </div>
+          </div>
+
+          {/* Blank Divs */}
+          <div className="mt-8"></div>
+          <div className="mt-8"></div>
+        </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <section
+        id="about"
+        className="flex flex-col items-center justify-center min-h-screen bg-white"
+      >
         <h2 className="text-3xl font-bold text-blue-600">About Me</h2>
-        <p className="mt-4 text-lg text-gray-700">This is the about section. Here, you can write about yourself.</p>
+        <p className="mt-4 text-lg text-gray-700">
+          This is the about section. Here, you can write about yourself.
+        </p>
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <section
+        id="portfolio"
+        className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
+      >
         <h2 className="text-3xl font-bold text-blue-600">Portfolio</h2>
-        <p className="mt-4 text-lg text-gray-700">This is the portfolio section. Showcase your work here.</p>
+        <p className="mt-4 text-lg text-gray-700">
+          This is the portfolio section. Showcase your work here.
+        </p>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <section
+        id="contact"
+        className="flex flex-col items-center justify-center min-h-screen bg-white"
+      >
         <h2 className="text-3xl font-bold text-blue-600">Contact Me</h2>
-        <p className="mt-4 text-lg text-gray-700">This is the contact section. Add a contact form or details here.</p>
+        <p className="mt-4 text-lg text-gray-700">
+          This is the contact section. Add a contact form or details here.
+        </p>
       </section>
     </div>
   );
