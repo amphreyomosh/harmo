@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*this is navbar*/
+#navbar{
+    background-color: #49777b;
+    height: 100px;
+    padding-top: 20px;
+    color: white; 
+   
+}
+#container{
+    border: 2px solid black;
+    border-radius: 50px; 
+    background-color: #f67103;
+}
+
+
+#home,
+#portfolio {
+  background-color: #49777b;
+}
+#about,
+#contact {
+  background-color: #d2c8aa;
+}

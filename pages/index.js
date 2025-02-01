@@ -13,9 +13,9 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Navbar */}
-      <nav className="sticky top-0 bg-white shadow-md z-50">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">Harmo</h1>
+      <nav id="navbar" className="sticky top-0 bg-white z-50">
+        <div id="container" className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Harmo</h1>
 
           {/* Hamburger Menu Button (visible on small screens) */}
           <button
@@ -24,9 +24,6 @@ export default function Home() {
           >
             <svg
               className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -44,8 +41,8 @@ export default function Home() {
               <button
                 onClick={() => scrollToSection("home")}
                 className={`text-lg font-medium ${
-                  activeSection === "home" ? "text-blue-600" : "text-gray-700"
-                } hover:text-blue-600`}
+                  activeSection === "home" ? "text-white" : "text-white"
+                }`}
               >
                 Home
               </button>
@@ -54,8 +51,8 @@ export default function Home() {
               <button
                 onClick={() => scrollToSection("about")}
                 className={`text-lg font-medium ${
-                  activeSection === "about" ? "text-blue-600" : "text-gray-700"
-                } hover:text-blue-600`}
+                  activeSection === "about" ? "text-white" : "text-gray-700"
+                }`}
               >
                 About
               </button>
@@ -65,9 +62,9 @@ export default function Home() {
                 onClick={() => scrollToSection("portfolio")}
                 className={`text-lg font-medium ${
                   activeSection === "portfolio"
-                    ? "text-blue-600"
-                    : "text-gray-700"
-                } hover:text-blue-600`}
+                    ? "text-white"
+                    : "text-white"
+                }`}
               >
                 Portfolio
               </button>
@@ -77,9 +74,9 @@ export default function Home() {
                 onClick={() => scrollToSection("contact")}
                 className={`text-lg font-medium ${
                   activeSection === "contact"
-                    ? "text-blue-600"
-                    : "text-gray-700"
-                } hover:text-blue-600`}
+                    ? "text-white"
+                    : "text-white"
+                }`}
               >
                 Contact
               </button>
@@ -95,8 +92,8 @@ export default function Home() {
                 <button
                   onClick={() => scrollToSection("home")}
                   className={`text-lg font-medium ${
-                    activeSection === "home" ? "text-blue-600" : "text-gray-700"
-                  } hover:text-blue-600`}
+                    activeSection === "home" ? "text-gray-600" : "text-gray-700"
+                  }`}
                 >
                   Home
                 </button>
@@ -106,9 +103,9 @@ export default function Home() {
                   onClick={() => scrollToSection("about")}
                   className={`text-lg font-medium ${
                     activeSection === "about"
-                      ? "text-blue-600"
+                      ? "text-gray-600"
                       : "text-gray-700"
-                  } hover:text-blue-600`}
+                  }`}
                 >
                   About
                 </button>
@@ -118,9 +115,9 @@ export default function Home() {
                   onClick={() => scrollToSection("portfolio")}
                   className={`text-lg font-medium ${
                     activeSection === "portfolio"
-                      ? "text-blue-600"
+                      ? "text-gray-600"
                       : "text-gray-700"
-                  } hover:text-blue-600`}
+                  }`}
                 >
                   Portfolio
                 </button>
@@ -130,9 +127,9 @@ export default function Home() {
                   onClick={() => scrollToSection("contact")}
                   className={`text-lg font-medium ${
                     activeSection === "contact"
-                      ? "text-blue-600"
+                      ? "text-gray-600"
                       : "text-gray-700"
-                  } hover:text-blue-600`}
+                  }`}
                 >
                   Contact
                 </button>
@@ -155,12 +152,12 @@ export default function Home() {
               <img
                 src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8a2lkfGVufDB8fDB8fHww"
                 alt="Profile"
-                className="w-48 h-48 object-cover rounded-full shadow-lg"
+                className="w-48 h-48 object-cover"
               />
             </div>
             {/* Column 2: H1 */}
             <div className="flex flex-col justify-center items-start">
-              <h1 className="text-4xl font-bold text-blue-600">
+              <h1 className="text-4xl font-bold text-gray-600">
                 Hi, I'm Harmo
               </h1>
             </div>
@@ -177,7 +174,7 @@ export default function Home() {
         id="about"
         className="flex flex-col items-center justify-center min-h-screen bg-white"
       >
-        <h2 className="text-3xl font-bold text-blue-600">About Me</h2>
+        <h2 className="text-3xl font-bold text-gray-600">About Me</h2>
         <p className="mt-4 text-lg text-gray-700">
           This is the about section. Here, you can write about yourself.
         </p>
@@ -188,7 +185,7 @@ export default function Home() {
         id="portfolio"
         className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
       >
-        <h2 className="text-3xl font-bold text-blue-600">Portfolio</h2>
+        <h2 className="text-3xl font-bold text-gray-600">Portfolio</h2>
         <p className="mt-4 text-lg text-gray-700">
           This is the portfolio section. Showcase your work here.
         </p>
@@ -199,7 +196,7 @@ export default function Home() {
         id="contact"
         className="flex flex-col items-center justify-center min-h-screen bg-white"
       >
-        <h2 className="text-3xl font-bold text-blue-600">Contact Me</h2>
+        <h2 className="text-3xl font-bold text-gray-600">Contact Me</h2>
         <p className="mt-4 text-lg text-gray-700">
           This is the contact section. Add a contact form or details here.
         </p>
