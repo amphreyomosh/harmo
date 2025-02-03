@@ -14,10 +14,11 @@
   }
 }
 #home,
-#portfolio {
+#portfolio, 
+#contact{
   background-color: white;
 }
-#about,
-#contact {
+#about
+ {
   background-color: gray;
 }
