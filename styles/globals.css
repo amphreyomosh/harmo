@@ -3,26 +3,16 @@
 @tailwind utilities;
 
 /*this is navbar*/
-#navbar {
-  background-color: #49777b;
-  height: 150px;
-  padding-top: 30px;
-  color: white;
+#menuOpen {
+  font-size: 100px;
+  font-family: "Bebas Neue";
 }
-#container {
-  border: 2px solid #f67103;
-  border-radius: 40px;
-  background-color: #f67103;
-  width: 90%;
+@media (max-width: 768px) {
+  #menuOpen {
+    font-size: 70px;
+    font-family: "Bebas Neue";
+  }
 }
-
-.navbar-opens {
-  background-color: #f67103;
-  width: 80%;
-  margin-left: 150px;
-  border-radius:  0 0 40px 40px;
-}
-
 #home,
 #portfolio {
   background-color: #49777b;
