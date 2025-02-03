@@ -14,129 +14,68 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Navbar */}
       <nav id="navbar" className="sticky top-0 bg-white z-50">
-        <div id="container" className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Harmo</h1>
-
-          {/* Hamburger Menu Button (visible on small screens) */}
+        <div
+          id="container"
+          className="container mx-auto px-6 py-4 flex justify-between items-center"
+        >
+          {/* Hamburger Menu Button (always visible) */}
+          <div>
+            <img
+              src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8a2lkfGVufDB8fDB8fHww"
+              alt="Profile"
+              className="w-12 h-12 rounded-full object-cover"
+            />
+          </div>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden focus:outline-none"
+            className="focus:outline-none"
           >
             <svg
-              className="w-6 h-6"
+              className="w-9 h-6"
               xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
+                strokeWidth="3"
                 d="M4 6h16M4 12h16m-7 6h7"
               />
             </svg>
           </button>
-
-          {/* Navbar Links (hidden on small screens, visible on larger screens) */}
-          <ul className="hidden lg:flex space-x-6">
-            <li>
-              <button
-                onClick={() => scrollToSection("home")}
-                className={`text-lg font-medium ${
-                  activeSection === "home" ? "text-white" : "text-white"
-                }`}
-              >
-                Home
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("about")}
-                className={`text-lg font-medium ${
-                  activeSection === "about" ? "text-white" : "text-gray-700"
-                }`}
-              >
-                About
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("portfolio")}
-                className={`text-lg font-medium ${
-                  activeSection === "portfolio"
-                    ? "text-white"
-                    : "text-white"
-                }`}
-              >
-                Portfolio
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className={`text-lg font-medium ${
-                  activeSection === "contact"
-                    ? "text-white"
-                    : "text-white"
-                }`}
-              >
-                Contact
-              </button>
-            </li>
-          </ul>
         </div>
 
-        {/* Mobile Menu (visible on small screens when hamburger is clicked) */}
-        {isMenuOpen && (
-          <div className="lg:hidden bg-white shadow-md">
-            <ul className="flex flex-col space-y-4 p-6">
-              <li>
+        {/* Mobile & Desktop Menu */}
+        <div
+          className={`navbar-opens shadow-md transition-all duration-500 ease-in-out overflow-hidden ${
+            isMenuOpen ? "max-h-96" : "max-h-0"
+          }`}
+          style={{
+            clipPath: isMenuOpen
+              ? "polygon(0 0, 100% 0, 100% 100%, 0 100%)"
+              : "polygon(0 0, 100% 0, 100% 0, 0 0)",
+          }}
+        >
+          <ul className="flex flex-col space-y-4 p-6">
+            {[
+              { name: "Home", id: "home" },
+              { name: "About", id: "about" },
+              { name: "Portfolio", id: "portfolio" },
+              { name: "Contact", id: "contact" },
+            ].map((item) => (
+              <li key={item.id}>
                 <button
-                  onClick={() => scrollToSection("home")}
-                  className={`text-lg font-medium ${
-                    activeSection === "home" ? "text-gray-600" : "text-gray-700"
-                  }`}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-lg font-medium text-gray-700"
                 >
-                  Home
+                  {item.name}
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("about")}
-                  className={`text-lg font-medium ${
-                    activeSection === "about"
-                      ? "text-gray-600"
-                      : "text-gray-700"
-                  }`}
-                >
-                  About
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("portfolio")}
-                  className={`text-lg font-medium ${
-                    activeSection === "portfolio"
-                      ? "text-gray-600"
-                      : "text-gray-700"
-                  }`}
-                >
-                  Portfolio
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className={`text-lg font-medium ${
-                    activeSection === "contact"
-                      ? "text-gray-600"
-                      : "text-gray-700"
-                  }`}
-                >
-                  Contact
-                </button>
-              </li>
-            </ul>
-          </div>
-        )}
+            ))}
+          </ul>
+        </div>
       </nav>
 
       {/* Home Section */}
@@ -145,9 +84,7 @@ export default function Home() {
         className="flex flex-col items-center justify-center min-h-screen"
       >
         <div className="container mx-auto px-4">
-          {/* First Div: Two Columns for Image and H1 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-            {/* Column 1: Image */}
             <div className="flex justify-center">
               <img
                 src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8a2lkfGVufDB8fDB8fHww"
@@ -155,17 +92,12 @@ export default function Home() {
                 className="w-48 h-48 object-cover"
               />
             </div>
-            {/* Column 2: H1 */}
             <div className="flex flex-col justify-center items-start">
               <h1 className="text-4xl font-bold text-gray-600">
                 Hi, I'm Harmo
               </h1>
             </div>
           </div>
-
-          {/* Blank Divs */}
-          <div className="mt-8"></div>
-          <div className="mt-8"></div>
         </div>
       </section>
 

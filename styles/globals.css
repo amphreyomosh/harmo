@@ -3,19 +3,25 @@
 @tailwind utilities;
 
 /*this is navbar*/
-#navbar{
-    background-color: #49777b;
-    height: 100px;
-    padding-top: 20px;
-    color: white; 
-   
+#navbar {
+  background-color: #49777b;
+  height: 150px;
+  padding-top: 30px;
+  color: white;
 }
-#container{
-    border: 2px solid black;
-    border-radius: 50px; 
-    background-color: #f67103;
+#container {
+  border: 2px solid #f67103;
+  border-radius: 40px;
+  background-color: #f67103;
+  width: 90%;
 }
 
+.navbar-opens {
+  background-color: #f67103;
+  width: 80%;
+  margin-left: 150px;
+  border-radius:  0 0 40px 40px;
+}
 
 #home,
 #portfolio {
