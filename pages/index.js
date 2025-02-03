@@ -14,8 +14,8 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Navbar (hidden when menu is open) */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 bg-gray-600 p-4 flex justify-between items-center transition-opacity duration-700 ${
-          isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+        className={`fixed top-0 left-0 right-0 z-50 bg-black p-6 flex justify-between items-center transition-opacity duration-700 ${
+          isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-80"
         }`}
       >
         <img
@@ -56,7 +56,10 @@ export default function Home() {
         >
           &times;
         </button>
-        <ul id="menuOpen" className="text-white text-5xl space-y-10 text-start ml-10">
+        <ul
+          id="menuOpen"
+          className="text-white text-5xl space-y-10 text-start ml-10"
+        >
           {["home", "about", "portfolio", "contact"].map((section) => (
             <li key={section}>
               <button
