@@ -15,7 +15,7 @@ export default function Home() {
       {/* Navbar (hidden when menu is open) */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 bg-black p-6 flex justify-between items-center transition-opacity duration-700 ${
-          isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-80"
+          isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-90"
         }`}
       >
         <img
