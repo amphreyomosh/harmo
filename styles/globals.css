@@ -24,6 +24,15 @@ body{
 #about {
   background-color: rgb(18, 18, 18);
   padding: 180px 50px 300px 50px;
+  img{
+    width: 100%;
+    height: 400px;
+    margin-top: 30px;
+    margin: 20px 30px auto 30px;
+  }
+}
+#home{
+  margin-bottom: -30px;
 }
 /* Fade-in animation for elements */
 @keyframes fade-in {

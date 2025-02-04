@@ -172,7 +172,7 @@ export default function Home() {
         className="flex flex-col md:flex-row items-center justify-center min-h-screen px-8 md:px-16 lg:px-24 opacity-1 translate-y-8 transition-all duration-400"
       >
         <div className="md:w-1/2 flex flex-col items-start text-left">
-          <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+          <h2 className="text-9xl font-bold text-white mb-4">About Me</h2>
           <p className="text-lg text-white leading-relaxed">
             I am a passionate front-end developer with a strong background in
             web design and development. With a keen eye for aesthetics and
@@ -189,7 +189,6 @@ export default function Home() {
           <img
             src="https://plus.unsplash.com/premium_photo-1738503913441-492589911717?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D"
             alt="About Me"
-            className="w-full max-w-md rounded-lg shadow-lg"
           />
         </div>
       </section>
