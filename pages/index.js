@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import Image from 'next/image';
+
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
@@ -70,7 +72,7 @@ export default function Home() {
         }`}
       >
         <img
-          src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8a2lkfGVufDB8fDB8fHww"
+          src="/harmo-image.jpg"
           alt="Profile"
           className="w-12 h-12 rounded-full object-cover"
         />
