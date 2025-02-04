@@ -19,14 +19,14 @@
   background-color: white;
 }
 #about {
-  background-color: rgb(17, 16, 16);
-  padding: 200px 50px;
+  background-color: rgb(18, 18, 18);
+  padding: 300px 50px;
 }
 /* Fade-in animation for elements */
 @keyframes fade-in {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   100% {
     opacity: 1;

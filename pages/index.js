@@ -5,25 +5,42 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const aboutRef = useRef(null);
+  const lastScrollY = useRef(0); // To track last scroll position
+  const [scrollDirection, setScrollDirection] = useState(null);
 
   useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY.current) {
+        // Scrolling down
+        setScrollDirection("down");
+      } else {
+        // Scrolling up
+        setScrollDirection("up");
+      }
+      lastScrollY.current = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-curl-open");
-            entry.target.querySelector("img").classList.add("animate-image-up");
-            entry.target.classList.remove("opacity-50", "translate-y-8");
-            entry.target.classList.add("opacity-100", "translate-y-0");
-          } else {
-            entry.target.classList.remove("animate-curl-open");
-            entry.target.querySelector("img").classList.remove("animate-image-up");
-            entry.target.classList.add("opacity-15", "translate-y-8");
-            entry.target.classList.remove("opacity-100", "translate-y-0");
+          const target = entry.target;
+
+          if (
+            entry.isIntersecting &&
+            !target.classList.contains("animate-curl-open") &&
+            scrollDirection === "down"
+          ) {
+            // Trigger animations only if scrolling down and the animation hasn't been triggered yet
+            target.classList.add("animate-curl-open");
+            target.querySelector("img").classList.add("animate-image-up");
+            target.classList.remove("opacity-0", "translate-y-8");
+            target.classList.add("opacity-100", "translate-y-0");
           }
         });
       },
-      { threshold: 0.15 } // Adjusted threshold to make it less sensitive
+      { threshold: 0.25 } // Adjusted threshold to make it less sensitive
     );
 
     if (aboutRef.current) {
@@ -31,11 +48,12 @@ export default function Home() {
     }
 
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       if (aboutRef.current) {
         observer.unobserve(aboutRef.current);
       }
     };
-  }, []);
+  }, [scrollDirection]);
 
   const scrollToSection = (section) => {
     setActiveSection(section);
@@ -149,7 +167,7 @@ export default function Home() {
       <section
         id="about"
         ref={aboutRef}
-        className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-white px-8 md:px-16 lg:px-24 opacity-0 translate-y-8 transition-all duration-700"
+        className="flex flex-col md:flex-row items-center justify-center min-h-screen px-8 md:px-16 lg:px-24 opacity-1 translate-y-8 transition-all duration-400"
       >
         <div className="md:w-1/2 flex flex-col items-start text-left">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
@@ -167,7 +185,7 @@ export default function Home() {
         </div>
         <div className="md:w-1/2 flex justify-center">
           <img
-            src="https://images.unsplash.com/photo-1738167039036-de7b00545f01?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
+            src="https://plus.unsplash.com/premium_photo-1738503913441-492589911717?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D"
             alt="About Me"
             className="w-full max-w-md rounded-lg shadow-lg"
           />
@@ -177,9 +195,160 @@ export default function Home() {
       {/* Portfolio Section */}
       <section
         id="portfolio"
-        className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
+        className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-16"
       >
-        <h2 className="text-4xl font-bold text-gray-600">Portfolio</h2>
+        <h2 className="text-4xl font-bold text-gray-600 mb-12">Portfolio</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-8">
+          {/* Card 1 */}
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=500&auto=format&fit=crop&q=60"
+              alt="Project 1"
+              className="w-full h-56 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Project One
+              </h3>
+              <p className="text-gray-600 mb-6">
+                A web development project that showcases my skills in HTML, CSS,
+                and JavaScript, including responsive design for optimal viewing
+                across devices.
+              </p>
+              <a
+                href="#"
+                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
+              >
+                View Project
+              </a>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1607745882631-f4d2be800b6e?w=500&auto=format&fit=crop&q=60"
+              alt="Project 2"
+              className="w-full h-56 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Project Two
+              </h3>
+              <p className="text-gray-600 mb-6">
+                This project focuses on building dynamic, interactive web
+                applications with React and API integrations to enhance user
+                experience.
+              </p>
+              <a
+                href="#"
+                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
+              >
+                View Project
+              </a>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1519756160765-4a28736f974b?w=500&auto=format&fit=crop&q=60"
+              alt="Project 3"
+              className="w-full h-56 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Project Three
+              </h3>
+              <p className="text-gray-600 mb-6">
+                A full-stack web application developed using Node.js, Express,
+                and MongoDB, showcasing my ability to build scalable back-end
+                solutions.
+              </p>
+              <a
+                href="#"
+                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
+              >
+                View Project
+              </a>
+            </div>
+          </div>
+
+          {/* Card 4 */}
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1565901728-98448c47e8a2?w=500&auto=format&fit=crop&q=60"
+              alt="Project 4"
+              className="w-full h-56 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Project Four
+              </h3>
+              <p className="text-gray-600 mb-6">
+                A responsive portfolio website that showcases my web development
+                skills, featuring an interactive design and a smooth user
+                experience.
+              </p>
+              <a
+                href="#"
+                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
+              >
+                View Project
+              </a>
+            </div>
+          </div>
+
+          {/* Card 5 */}
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1573497491207-e9e5ed9a9d80?w=500&auto=format&fit=crop&q=60"
+              alt="Project 5"
+              className="w-full h-56 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Project Five
+              </h3>
+              <p className="text-gray-600 mb-6">
+                An e-commerce website with shopping cart functionality, user
+                authentication, and payment integration, using modern web
+                technologies.
+              </p>
+              <a
+                href="#"
+                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
+              >
+                View Project
+              </a>
+            </div>
+          </div>
+
+          {/* Card 6 */}
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+            <img
+              src="https://images.unsplash.com/photo-1526379072082-2c5103b2f63c?w=500&auto=format&fit=crop&q=60"
+              alt="Project 6"
+              className="w-full h-56 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                Project Six
+              </h3>
+              <p className="text-gray-600 mb-6">
+                A blogging platform built with Next.js and GraphQL, allowing
+                users to create, edit, and manage their content effortlessly.
+              </p>
+              <a
+                href="#"
+                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
+              >
+                View Project
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Contact Section */}
@@ -255,32 +424,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-10 mt-10">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} Harmo | All Rights Reserved
-          </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a
-              href="https://twitter.com"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Twitter
-            </a>
-            <a
-              href="https://github.com"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://linkedin.com"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
+      <footer className="bg-black text-white py-6 text-center">
+        <p>&copy; 2025 Harmo. All rights reserved.</p>
       </footer>
     </div>
   );
