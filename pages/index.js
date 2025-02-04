@@ -4,8 +4,11 @@ import Image from "next/image";
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkBackground, setIsDarkBackground] = useState(false);
 
   const aboutRef = useRef(null);
+  const portfolioRef = useRef(null);
+  const contactRef = useRef(null);
   const lastScrollY = useRef(0); // To track last scroll position
   const [scrollDirection, setScrollDirection] = useState(null);
 
@@ -39,6 +42,11 @@ export default function Home() {
             target.classList.remove("opacity-0", "translate-y-8");
             target.classList.add("opacity-100", "translate-y-0");
           }
+
+          // Check if portfolio or contact section is in view
+          if (target.id === "portfolio" || target.id === "contact") {
+            setIsDarkBackground(entry.isIntersecting);
+          }
         });
       },
       { threshold: 0.25 } // Adjusted threshold to make it less sensitive
@@ -47,11 +55,23 @@ export default function Home() {
     if (aboutRef.current) {
       observer.observe(aboutRef.current);
     }
+    if (portfolioRef.current) {
+      observer.observe(portfolioRef.current);
+    }
+    if (contactRef.current) {
+      observer.observe(contactRef.current);
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (aboutRef.current) {
         observer.unobserve(aboutRef.current);
+      }
+      if (portfolioRef.current) {
+        observer.unobserve(portfolioRef.current);
+      }
+      if (contactRef.current) {
+        observer.unobserve(contactRef.current);
       }
     };
   }, [scrollDirection]);
@@ -80,7 +100,9 @@ export default function Home() {
           className="focus:outline-none relative z-50"
         >
           <svg
-            className="w-9 h-6 text-white"
+            className={`w-9 h-14 ${
+              isDarkBackground ? "text-black" : "text-white"
+            }`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
@@ -195,6 +217,7 @@ export default function Home() {
       {/* Portfolio Section */}
       <section
         id="portfolio"
+        ref={portfolioRef}
         className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-16"
       >
         <h2 className="text-4xl font-bold text-gray-600 mb-12">Portfolio</h2>
