@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import Image from 'next/image';
-
+import Image from "next/image";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
@@ -204,7 +203,7 @@ export default function Home() {
           {/* Card 1 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
             <img
-              src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=500&auto=format&fit=crop&q=60"
+              src="https://plus.unsplash.com/premium_photo-1663047707111-c022dee3abe7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVhbHxlbnwwfHwwfHx8MA%3D%3D"
               alt="Project 1"
               className="w-full h-56 object-cover"
             />
@@ -218,7 +217,7 @@ export default function Home() {
                 across devices.
               </p>
               <a
-                href="#"
+                href="https://mealsite.netlify.app/"
                 className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
               >
                 View Project
@@ -229,7 +228,7 @@ export default function Home() {
           {/* Card 2 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
             <img
-              src="https://images.unsplash.com/photo-1607745882631-f4d2be800b6e?w=500&auto=format&fit=crop&q=60"
+              src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXJ0fGVufDB8fDB8fHww0"
               alt="Project 2"
               className="w-full h-56 object-cover"
             />
@@ -243,7 +242,7 @@ export default function Home() {
                 experience.
               </p>
               <a
-                href="#"
+                href="https://artwork-kappa.vercel.app/"
                 className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
               >
                 View Project
