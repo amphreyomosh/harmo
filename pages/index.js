@@ -403,15 +403,21 @@ export default function Home() {
 
           {/* Right Column - Contact Form */}
           <div>
-            <form className="space-y-6">
+            <form
+              action="https://formspree.io/f/mjkgobvw"
+              method="POST"
+              className="space-y-6"
+            >
               <div>
                 <label className="block text-gray-700 font-medium mb-1">
                   Full Name
                 </label>
                 <input
                   type="text"
+                  name="name"
                   placeholder="Enter your name"
-                  className="w-full p-3 border border-gray-400 focus:outline-none"
+                  className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none"
+                  required
                 />
               </div>
               <div>
@@ -420,8 +426,10 @@ export default function Home() {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="Enter your email"
-                  className="w-full p-3 border border-gray-400 focus:outline-none"
+                  className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none"
+                  required
                 />
               </div>
               <div>
@@ -429,14 +437,16 @@ export default function Home() {
                   Message
                 </label>
                 <textarea
+                  name="message"
                   rows="4"
                   placeholder="Write your message"
-                  className="w-full p-3 border border-gray-400 focus:outline-none"
+                  className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none"
+                  required
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-black text-white py-3 font-medium hover:bg-gray-900 transition"
+                className="w-full bg-black text-white py-3 font-medium rounded-lg hover:bg-gray-900 transition"
               >
                 Send Message
               </button>
@@ -444,6 +454,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* Footer */}
       <footer id="footer" className="bg-black text-white py-6 text-center">
         <p>&copy; 2025 Harmo. All rights reserved.</p>
