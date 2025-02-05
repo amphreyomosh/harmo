@@ -219,7 +219,7 @@ export default function Home() {
         </div>
         <div className="md:w-1/2 flex justify-center">
           <img
-            src="/nikhil-mitra-Q_6BS8IN0J8-unsplash-removebg-preview.png"
+            src="https://media.istockphoto.com/id/183766364/photo/portrait-of-a-faceless-man.webp?a=1&b=1&s=612x612&w=0&k=20&c=487iEyJGi7hMSti8b3ocY5mbXoL20uH6IulaQbYzDcQ="
             alt="About Me"
           />
         </div>
