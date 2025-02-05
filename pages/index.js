@@ -11,6 +11,7 @@ export default function Home() {
   const contactRef = useRef(null);
   const lastScrollY = useRef(0); // To track last scroll position
   const [scrollDirection, setScrollDirection] = useState(null);
+  const [aboutSectionVisible, setAboutSectionVisible] = useState(false); // Track if the about section is in view
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,21 +32,14 @@ export default function Home() {
         entries.forEach((entry) => {
           const target = entry.target;
 
-          if (
-            entry.isIntersecting &&
-            !target.classList.contains("animate-curl-open") &&
-            scrollDirection === "down"
-          ) {
-            // Trigger animations only if scrolling down and the animation hasn't been triggered yet
-            target.classList.add("animate-curl-open");
-            target.querySelector("img").classList.add("animate-image-up");
-            target.classList.remove("opacity-0", "translate-y-8");
-            target.classList.add("opacity-100", "translate-y-0");
-          }
-
           // Check if portfolio or contact section is in view
           if (target.id === "portfolio" || target.id === "contact") {
             setIsDarkBackground(entry.isIntersecting);
+          }
+
+          // Track if the About section is in view
+          if (target.id === "about") {
+            setAboutSectionVisible(entry.isIntersecting);
           }
         });
       },
@@ -190,7 +184,9 @@ export default function Home() {
       <section
         id="about"
         ref={aboutRef}
-        className="flex flex-col md:flex-row items-center justify-center min-h-screen px-8 md:px-16 lg:px-24 opacity-1 translate-y-8 transition-all duration-400"
+        className={`flex flex-col md:flex-row items-center justify-center min-h-screen px-8 md:px-16 lg:px-24 transition-all duration-700 transform ${
+          aboutSectionVisible ? "translate-y-0" : "translate-y-10 opacity-0"
+        }`}
       >
         <div className="md:w-1/2 flex flex-col items-start text-left">
           <h2 className="text-9xl font-bold text-white mb-4">About Me</h2>
@@ -224,7 +220,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-8">
           {/* Card 1 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://plus.unsplash.com/premium_photo-1663047707111-c022dee3abe7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVhbHxlbnwwfHwwfHx8MA%3D%3D"
               alt="Project 1"
@@ -249,7 +245,7 @@ export default function Home() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXJ0fGVufDB8fDB8fHww0"
               alt="Project 2"
@@ -274,7 +270,7 @@ export default function Home() {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1519756160765-4a28736f974b?w=500&auto=format&fit=crop&q=60"
               alt="Project 3"
@@ -299,7 +295,7 @@ export default function Home() {
           </div>
 
           {/* Card 4 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1565901728-98448c47e8a2?w=500&auto=format&fit=crop&q=60"
               alt="Project 4"
@@ -324,7 +320,7 @@ export default function Home() {
           </div>
 
           {/* Card 5 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1573497491207-e9e5ed9a9d80?w=500&auto=format&fit=crop&q=60"
               alt="Project 5"
@@ -349,7 +345,7 @@ export default function Home() {
           </div>
 
           {/* Card 6 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1526379072082-2c5103b2f63c?w=500&auto=format&fit=crop&q=60"
               alt="Project 6"
@@ -373,7 +369,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Contact Section */}
       <section
         id="contact"
@@ -445,7 +440,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-black text-white py-6 text-center">
         <p>&copy; 2025 Harmo. All rights reserved.</p>
