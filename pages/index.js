@@ -171,7 +171,7 @@ export default function Home() {
             Hi, I'm Harmo
           </h1>
           <p className="text-lg md:text-2xl mb-6 animate-fade-in delay-200">
-            A passionate front-end developer crafting amazing user experiences.
+            A passionate front-end developer crafting amazing user experiences always.
           </p>
           <a
             href="#portfolio"
