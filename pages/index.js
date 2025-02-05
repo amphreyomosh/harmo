@@ -148,12 +148,20 @@ export default function Home() {
       {/* Home Section */}
       <section
         id="home"
-        className="relative flex items-center min-h-screen bg-cover bg-center pt-24 px-8 md:px-16 lg:px-24"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?fit=crop&w=1920&q=80')",
-        }}
+        className="relative flex items-center min-h-screen pt-24 px-8 md:px-16 lg:px-24"
       >
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/Animated Wallpaper RIVER (1hour)(4k)(60fps).mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
@@ -276,7 +284,7 @@ export default function Home() {
           {/* Card 3 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1519756160765-4a28736f974b?w=500&auto=format&fit=crop&q=60"
+              src="https://plus.unsplash.com/premium_photo-1682147208772-c4ae4db3ab7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG11c2ljJTIwYXJ0fGVufDB8fDB8fHww"
               alt="Project 3"
               className="w-full h-56 object-cover"
             />
@@ -290,7 +298,7 @@ export default function Home() {
                 solutions.
               </p>
               <a
-                href="#"
+                href="https://dreamsters.netlify.app"
                 className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
               >
                 View Project
