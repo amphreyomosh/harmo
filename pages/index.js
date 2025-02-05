@@ -158,7 +158,10 @@ export default function Home() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/Animated Wallpaper RIVER (1hour)(4k)(60fps).mp4" type="video/mp4" />
+          <source
+            src="/Animated Wallpaper RIVER (1hour)(4k)(60fps).mp4"
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
 
@@ -216,7 +219,7 @@ export default function Home() {
         </div>
         <div className="md:w-1/2 flex justify-center">
           <img
-            src="https://plus.unsplash.com/premium_photo-1738503913441-492589911717?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D"
+            src="/nikhil-mitra-Q_6BS8IN0J8-unsplash-removebg-preview.png"
             alt="About Me"
           />
         </div>
@@ -240,12 +243,13 @@ export default function Home() {
             />
             <div className="p-6">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Project One
+                Project One | <i>Meal Site</i>
               </h3>
               <p className="text-gray-600 mb-6">
-                A web development project that showcases my skills in HTML, CSS,
-                and JavaScript, including responsive design for optimal viewing
-                across devices.
+                A web application that allows users to search for recipes based
+                on ingredients, dietary restrictions, and meal types. Users can
+                also save their favorite recipes and create a shopping list
+                based on their meal plan.
               </p>
               <a
                 href="https://mealsite.netlify.app/"
@@ -265,12 +269,11 @@ export default function Home() {
             />
             <div className="p-6">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Project Two
+                Project Two | <i>artwork Site</i>
               </h3>
               <p className="text-gray-600 mb-6">
-                This project focuses on building dynamic, interactive web
-                applications with React and API integrations to enhance user
-                experience.
+                A gallery website that showcases various artworks, providing an
+                interactive experience for art enthusiasts to explore and enjoy
               </p>
               <a
                 href="https://artwork-kappa.vercel.app/"
@@ -290,12 +293,13 @@ export default function Home() {
             />
             <div className="p-6">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Project Three
+                Project Three | <i>Dreamsters site</i>
               </h3>
               <p className="text-gray-600 mb-6">
-                A full-stack web application developed using Node.js, Express,
-                and MongoDB, showcasing my ability to build scalable back-end
-                solutions.
+                A music streaming platform that allows users to discover, listen
+                to, and share their favorite tracks. Built with a focus on user
+                experience, this project integrates with various music APIs to
+                provide a seamless and enjoyable listening experience.
               </p>
               <a
                 href="https://dreamsters.netlify.app"
@@ -309,7 +313,7 @@ export default function Home() {
           {/* Card 4 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1565901728-98448c47e8a2?w=500&auto=format&fit=crop&q=60"
+              src="/comingsoon.jpg"
               alt="Project 4"
               className="w-full h-56 object-cover"
             />
@@ -323,7 +327,7 @@ export default function Home() {
                 experience.
               </p>
               <a
-                href="#"
+                href="/comingsoon.jpg"
                 className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
               >
                 View Project
@@ -334,7 +338,7 @@ export default function Home() {
           {/* Card 5 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1573497491207-e9e5ed9a9d80?w=500&auto=format&fit=crop&q=60"
+              src="/comingsoon.jpg"
               alt="Project 5"
               className="w-full h-56 object-cover"
             />
@@ -348,7 +352,7 @@ export default function Home() {
                 technologies.
               </p>
               <a
-                href="#"
+                href="/comingsoon.jpg"
                 className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
               >
                 View Project
@@ -359,7 +363,7 @@ export default function Home() {
           {/* Card 6 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1526379072082-2c5103b2f63c?w=500&auto=format&fit=crop&q=60"
+              src="/comingsoon.jpg"
               alt="Project 6"
               className="w-full h-56 object-cover"
             />
@@ -372,7 +376,7 @@ export default function Home() {
                 users to create, edit, and manage their content effortlessly.
               </p>
               <a
-                href="#"
+                href="/comingsoon.jpg"
                 className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
               >
                 View Project
@@ -386,7 +390,7 @@ export default function Home() {
         id="contact"
         className="min-h-screen flex items-center justify-center bg-gray-100 px-8 py-16"
       >
-        <div className="max-w-5xl w-full bg-white shadow-lg p-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="max-w-5xl w-full bg-white shadow-lg p-14 grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Left Column - Contact Info */}
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl font-semibold text-gray-800 mb-4">
