@@ -150,20 +150,17 @@ export default function Home() {
         id="home"
         className="relative flex items-center min-h-screen pt-24 px-8 md:px-16 lg:px-24"
       >
-        {/* Video Background */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source
-            src="/Animated Wallpaper RIVER (1hour)(4k)(60fps).mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
+        {/* Image Background */}
+        <div
+          className="absolute inset-0 w-full h-full bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?w=1920&auto=format&fit=crop&q=100&ixlib=rb-4.0.3')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></div>
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
