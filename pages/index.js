@@ -416,7 +416,7 @@ export default function Home() {
                   type="text"
                   name="name"
                   placeholder="Enter your name"
-                  className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none"
+                  className="w-full p-3 border border-gray-400 focus:outline-none"
                   required
                 />
               </div>
@@ -428,7 +428,7 @@ export default function Home() {
                   type="email"
                   name="email"
                   placeholder="Enter your email"
-                  className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none"
+                  className="w-full p-3 border border-gray-400 focus:outline-none"
                   required
                 />
               </div>
@@ -440,13 +440,13 @@ export default function Home() {
                   name="message"
                   rows="4"
                   placeholder="Write your message"
-                  className="w-full p-3 border border-gray-400 rounded-lg focus:outline-none"
+                  className="w-full p-3 border border-gray-400 focus:outline-none"
                   required
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full bg-black text-white py-3 font-medium rounded-lg hover:bg-gray-900 transition"
+                className="w-full bg-black text-white py-3 font-medium  hover:bg-gray-900 transition"
               >
                 Send Message
               </button>
