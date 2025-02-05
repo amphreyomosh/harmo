@@ -17,6 +17,7 @@ class MyDocument extends Document {
 
           {/* Essential Meta Tags */}
           <meta charSet="UTF-8" />
+          <meta name="google-site-verification" content="JmSBZFdkEXBfpvuRnH5r4NfHm-ZAV3bvw6fuW_seW4w" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="description" content="Explore Harmo's amazing portfolio showcasing web development and design skills." />
           <meta name="keywords" content="Harmo, portfolio, web development, Next.js, React, frontend, SEO" />
