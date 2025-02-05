@@ -33,7 +33,11 @@ export default function Home() {
           const target = entry.target;
 
           // Check if portfolio or contact section is in view
-          if (target.id === "portfolio" || target.id === "contact") {
+          if (
+            target.id === "portfolio" ||
+            target.id === "contact" ||
+            target.id === "footer"
+          ) {
             setIsDarkBackground(entry.isIntersecting);
           }
 
@@ -386,10 +390,10 @@ export default function Home() {
             </p>
             <div className="space-y-4">
               <p className="text-gray-700">
-                <strong>Email:</strong> your.email@example.com
+                <strong>Email:</strong> amphreyomosh2001@gmail.com
               </p>
               <p className="text-gray-700">
-                <strong>Phone:</strong> +123 456 789
+                <strong>Phone:</strong> +254 115 193 497
               </p>
               <p className="text-gray-700">
                 <strong>Address:</strong> Nairobi, Kenya
@@ -441,7 +445,7 @@ export default function Home() {
         </div>
       </section>
       {/* Footer */}
-      <footer className="bg-black text-white py-6 text-center">
+      <footer id="footer" className="bg-black text-white py-6 text-center">
         <p>&copy; 2025 Harmo. All rights reserved.</p>
       </footer>
     </div>
