@@ -168,7 +168,7 @@ export default function Home() {
         {/* Left Content - Text Section */}
         <div className="relative z-10 text-white max-w-2xl">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Hi, I'm Harmo
+            Hi, I'm Humphrey
           </h1>
           <p className="text-lg md:text-2xl mb-6 animate-fade-in delay-200">
             A passionate front-end developer crafting amazing user experiences always.
