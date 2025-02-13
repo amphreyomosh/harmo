@@ -43,7 +43,7 @@ class MyDocument extends Document {
           <meta name="twitter:image" content="https://harmo.vercel.app/twitter-image.jpg" />
 
           {/* Favicon & App Icons */}
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/harmo-image.jpg" />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
           {/* Structured Data (JSON-LD for Google Rich Results) */}
