@@ -33,11 +33,7 @@ export default function Home() {
           const target = entry.target;
 
           // Check if portfolio or contact section is in view
-          if (
-            target.id === "portfolio" ||
-            target.id === "contact" ||
-            target.id === "footer"
-          ) {
+          if (target.id === "portfolio" || target.id === "contact") {
             setIsDarkBackground(entry.isIntersecting);
           }
 
@@ -81,7 +77,6 @@ export default function Home() {
   };
 
   return (
-    
     <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Navbar */}
       <nav
@@ -172,7 +167,8 @@ export default function Home() {
             Hi, I'm Humphrey
           </h1>
           <p className="text-lg md:text-2xl mb-6 animate-fade-in delay-200">
-            A passionate front-end developer crafting amazing user experiences always.
+            A passionate front-end developer crafting amazing user experiences
+            always.
           </p>
           <a
             href="#portfolio"
