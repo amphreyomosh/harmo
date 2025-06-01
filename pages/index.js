@@ -1,5 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import Image from "next/image";
+
+// Lazy load components
+const AboutSection = lazy(() => import('./components/AboutSection'));
+const PortfolioSection = lazy(() => import('./components/PortfolioSection'));
+const ContactSection = lazy(() => import('./components/ContactSection'));
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
@@ -84,10 +89,13 @@ export default function Home() {
           isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-90"
         }`}
       >
-        <img
+        <Image
           src="/harmo-image.jpg"
           alt="Profile"
-          className="w-12 h-12 rounded-full object-cover"
+          width={48}
+          height={48}
+          className="rounded-full object-cover"
+          priority
         />
         <button
           onClick={() => setIsMenuOpen(true)}
@@ -331,140 +339,106 @@ export default function Home() {
 
           {/* Card 5 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="/comingsoon.jpg"
-              alt="Project 5"
-              className="w-full h-56 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Project Five
-              </h3>
-              <p className="text-gray-600 mb-6">
-                An e-commerce website with shopping cart functionality, user
-                authentication, and payment integration, using modern web
-                technologies.
-              </p>
-              <a
-                href="/comingsoon.jpg"
-                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
-              >
-                View Project
-              </a>
-            </div>
-          </div>
-
-          {/* Card 6 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src="/comingsoon.jpg"
-              alt="Project 6"
-              className="w-full h-56 object-cover"
-            />
-            <div className="p-6">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Project Six
-              </h3>
-              <p className="text-gray-600 mb-6">
-                A blogging platform built with Next.js and GraphQL, allowing
-                users to create, edit, and manage their content effortlessly.
-              </p>
-              <a
-                href="/comingsoon.jpg"
-                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
-              >
-                View Project
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Contact Section */}
-      <section
-        id="contact"
-        className="min-h-screen flex items-center justify-center bg-gray-100 px-8 py-16"
-      >
-        <div className="max-w-5xl w-full bg-white shadow-lg p-14 grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Column - Contact Info */}
-          <div className="flex flex-col justify-center">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-              Get in Touch
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Feel free to reach out for collaborations or inquiries. I'll get
-              back to you as soon as possible.
-            </p>
-            <div className="space-y-4">
-              <p className="text-gray-700">
-                <strong>Email:</strong> amphreyomosh2001@gmail.com
-              </p>
-              <p className="text-gray-700">
-                <strong>Phone:</strong> +254 115 193 497
-              </p>
-              <p className="text-gray-700">
-                <strong>Address:</strong> Nairobi, Kenya
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column - Contact Form */}
-          <div>
-            <form
-              action="https://formspree.io/f/mjkgobvw"
-              method="POST"
-              className="space-y-6"
-            >
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Enter your name"
-                  className="w-full p-3 border border-gray-400 focus:outline-none"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  className="w-full p-3 border border-gray-400 focus:outline-none"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 font-medium mb-1">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  rows="4"
-                  placeholder="Write your message"
-                  className="w-full p-3 border border-gray-400 focus:outline-none"
-                  required
-                ></textarea>
-              </div>
+            {/* Main Content */}
+      <main className="flex-grow">
+        {/* Home Section */}
+        <section id="home" className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">Welcome to My Portfolio</h1>
+            <p className="text-xl mb-8">Web Developer & Designer</p>
+            <div className="flex justify-center gap-4">
               <button
-                type="submit"
-                className="w-full bg-black text-white py-3 font-medium  hover:bg-gray-900 transition"
+                onClick={() => scrollToSection("about")}
+                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
               >
-                Send Message
+                About Me
               </button>
-            </form>
+              <button
+                onClick={() => scrollToSection("portfolio")}
+                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+              >
+                Portfolio
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+              >
+                Contact
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Lazy loaded sections */}
+        <Suspense fallback={<div className="py-20">Loading...</div>}>
+          <AboutSection aboutRef={aboutRef} />
+        </Suspense>
+        <Suspense fallback={<div className="py-20">Loading...</div>}>
+          <PortfolioSection portfolioRef={portfolioRef} />
+        </Suspense>
+        <Suspense fallback={<div className="py-20">Loading...</div>}>
+          <ContactSection contactRef={contactRef} />
+        </Suspense>
+      </main>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
+          <div className="fixed right-0 top-0 w-full md:w-64 h-full bg-white shadow-lg z-50 p-6">
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-4 right-4"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <nav className="mt-8">
+              <button
+                onClick={() => scrollToSection("home")}
+                className="block w-full text-left py-2 px-4 hover:bg-gray-100 rounded"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => scrollToSection("about")}
+                className="block w-full text-left py-2 px-4 hover:bg-gray-100 rounded"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection("portfolio")}
+                className="block w-full text-left py-2 px-4 hover:bg-gray-100 rounded"
+              >
+                Portfolio
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="block w-full text-left py-2 px-4 hover:bg-gray-100 rounded"
+              >
+                Contact
+              </button>
+            </nav>
           </div>
         </div>
-      </section>
+      )}
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer id="footer" className="bg-black text-white py-6 text-center">
         <p>&copy; 2025 Harmo. All rights reserved.</p>
       </footer>
     </div>
-  );
-}
+  )}
