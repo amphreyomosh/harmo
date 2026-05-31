@@ -438,7 +438,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer id="footer" className="bg-black text-white py-6 text-center">
-        <p>&copy; 2025 Harmo. All rights reserved.</p>
+        <p>&copy; 2026 Harmo. All rights reserved.</p>
       </footer>
     </div>
   )}
