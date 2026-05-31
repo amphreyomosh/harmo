@@ -1,8 +1,9 @@
-import { Fraunces, Poppins } from 'next/font/google';
+import { Luckiest_Guy, Poppins } from 'next/font/google';
 import '../styles/globals.css';
 
-const fraunces = Fraunces({
+const fraunces = Luckiest_Guy({
   subsets: ['latin'],
+  weight: '400',
   variable: '--font-fraunces',
   display: 'swap',
 });
