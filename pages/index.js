@@ -83,6 +83,15 @@ const mockupCategories = [
   "Brand Identity",
 ];
 
+const categoryColors = {
+  "Web Design":     "bg-blue-500",
+  "UI/UX":          "bg-violet-500",
+  "Landing Page":   "bg-orange-500",
+  "Dashboard":      "bg-teal-500",
+  "Mobile App":     "bg-rose-500",
+  "Brand Identity": "bg-amber-500",
+};
+
 const mockupProjects = Array.from({ length: 18 }, (_, i) => ({
   id: i + 1,
   title: `Design ${i + 1}`,
@@ -135,15 +144,16 @@ const socialLinks = [
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-const MOCKUPS_PER_PAGE = 6;
-
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkBackground, setIsDarkBackground] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [scrollY, setScrollY] = useState(0);
   const [activeTab, setActiveTab] = useState("websites");
-  const [mockupPage, setMockupPage] = useState(0);
+  const [liveCanScrollLeft, setLiveCanScrollLeft] = useState(false);
+  const [liveCanScrollRight, setLiveCanScrollRight] = useState(true);
+  const [mockupCanScrollLeft, setMockupCanScrollLeft] = useState(false);
+  const [mockupCanScrollRight, setMockupCanScrollRight] = useState(true);
   const [aboutSlide, setAboutSlide] = useState(0);
   const [aboutVisible, setAboutVisible] = useState(false);
   const [aboutRow2Visible, setAboutRow2Visible] = useState(false);
@@ -155,6 +165,8 @@ export default function Home() {
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
   const slideTimerRef = useRef(null);
+  const liveScrollRef = useRef(null);
+  const mockupScrollRef = useRef(null);
 
   const totalMockupPages = Math.ceil(mockupProjects.length / MOCKUPS_PER_PAGE);
   const currentMockups = mockupProjects.slice(
@@ -211,6 +223,35 @@ export default function Home() {
     }, 3500);
     return () => clearInterval(timer);
   }, []);
+
+  // Horizontal scroll helpers
+  const checkLiveScroll = () => {
+    const el = liveScrollRef.current;
+    if (!el) return;
+    setLiveCanScrollLeft(el.scrollLeft > 0);
+    setLiveCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+  };
+  const checkMockupScroll = () => {
+    const el = mockupScrollRef.current;
+    if (!el) return;
+    setMockupCanScrollLeft(el.scrollLeft > 0);
+    setMockupCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+  };
+  const scrollCards = (ref, dir) => {
+    const el = ref.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.round(el.clientWidth * 0.55), behavior: "smooth" });
+  };
+
+  // Re-check button states whenever the active tab changes
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      checkLiveScroll();
+      checkMockupScroll();
+    });
+    return () => cancelAnimationFrame(frame);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
 
   // Section visibility observers
   useEffect(() => {
@@ -559,126 +600,127 @@ export default function Home() {
             From fully functional live websites to polished design mockups — here's what I've been building.
           </p>
 
-          {/* Tab switcher */}
-          <div className="flex gap-1 mb-12 bg-gray-200 p-1 rounded-full w-fit">
-            <button
-              onClick={() => setActiveTab("websites")}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === "websites" ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-gray-800"}`}
-            >
-              Live Websites
-            </button>
-            <button
-              onClick={() => { setActiveTab("mockups"); setMockupPage(0); }}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === "mockups" ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-gray-800"}`}
-            >
-              Mockups <span className="opacity-50 ml-0.5 text-xs">18</span>
-            </button>
+          {/* Tabs + nav arrows on the same row */}
+          <div className="flex items-center justify-between mb-8 gap-4">
+            <div className="flex gap-1 bg-gray-200 p-1 rounded-full w-fit">
+              <button
+                onClick={() => setActiveTab("websites")}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === "websites" ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-gray-800"}`}
+              >
+                Live Websites
+              </button>
+              <button
+                onClick={() => setActiveTab("mockups")}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === "mockups" ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-gray-800"}`}
+              >
+                Mockups <span className="opacity-50 ml-0.5 text-xs">18</span>
+              </button>
+            </div>
+
+            {/* Shared prev / next */}
+            <div className="flex gap-2 flex-shrink-0">
+              <button
+                onClick={() => scrollCards(activeTab === "websites" ? liveScrollRef : mockupScrollRef, -1)}
+                disabled={activeTab === "websites" ? !liveCanScrollLeft : !mockupCanScrollLeft}
+                className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center disabled:opacity-25 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-200"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => scrollCards(activeTab === "websites" ? liveScrollRef : mockupScrollRef, 1)}
+                disabled={activeTab === "websites" ? !liveCanScrollRight : !mockupCanScrollRight}
+                className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center disabled:opacity-25 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-200"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          {/* ── Live Websites grid ── */}
+          {/* ── Live Websites — horizontal scroll ── */}
           {activeTab === "websites" && (
-            <div className="grid sm:grid-cols-2 gap-8">
+            <div
+              ref={liveScrollRef}
+              onScroll={checkLiveScroll}
+              className="flex gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
               {websiteProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5"
+                  className="relative flex-none w-[270px] sm:w-[300px] h-[480px] rounded-2xl overflow-hidden group cursor-pointer"
                 >
-                  <div className="relative h-56 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-500 flex items-center justify-center">
-                      {project.link ? (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-white text-black font-semibold px-5 py-2.5 rounded-full text-sm flex items-center gap-1.5"
-                        >
-                          View Live
-                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+                  {/* Badge */}
+                  <span className="absolute top-4 left-4 bg-white text-black text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">
+                    Live
+                  </span>
+
+                  {/* Bottom content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <p className="text-white/50 text-[10px] uppercase tracking-widest mb-1.5">{project.label}</p>
+                    <h3 className="font-fraunces text-xl font-bold text-white mb-3 leading-snug">{project.title}</h3>
+                    {project.link ? (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors"
+                      >
+                        <span className="w-7 h-7 rounded-full border border-white/50 flex items-center justify-center group-hover:border-white transition-colors">
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                           </svg>
-                        </a>
-                      ) : (
-                        <span className="translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 bg-gray-200 text-gray-700 font-semibold px-5 py-2.5 rounded-full text-sm">
-                          Coming Soon
                         </span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <p className="text-xs uppercase tracking-widest text-gray-400 mb-1">{project.label}</p>
-                    <h3 className="font-fraunces text-xl font-semibold text-gray-900 mb-3">{project.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed mb-4">{project.description}</p>
-                    <div className="flex gap-2 flex-wrap">
-                      {project.tech.map((t) => (
-                        <span key={t} className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">{t}</span>
-                      ))}
-                    </div>
+                        View Live
+                      </a>
+                    ) : (
+                      <span className="text-white/40 text-sm">Coming Soon</span>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           )}
 
-          {/* ── Mockups grid + pagination ── */}
+          {/* ── Mockups — horizontal scroll ── */}
           {activeTab === "mockups" && (
-            <div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-10">
-                {currentMockups.map((mockup) => (
-                  <div
-                    key={mockup.id}
-                    className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-                  >
-                    <div className="relative h-36 sm:h-44 overflow-hidden">
-                      <img
-                        src={mockup.image}
-                        alt={mockup.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300" />
-                    </div>
-                    <div className="p-3 md:p-4">
-                      <p className="text-xs uppercase tracking-widest text-gray-400 mb-0.5">{mockup.category}</p>
-                      <p className="font-fraunces text-sm md:text-base font-semibold text-gray-800">{mockup.title}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div
+              ref={mockupScrollRef}
+              onScroll={checkMockupScroll}
+              className="flex gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {mockupProjects.map((mockup) => (
+                <div
+                  key={mockup.id}
+                  className="relative flex-none w-[220px] sm:w-[240px] h-[360px] rounded-2xl overflow-hidden group cursor-pointer"
+                >
+                  <img
+                    src={mockup.image}
+                    alt={mockup.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-              {/* Pagination */}
-              <div className="flex items-center justify-center gap-4">
-                <button
-                  onClick={() => setMockupPage((p) => Math.max(0, p - 1))}
-                  disabled={mockupPage === 0}
-                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center disabled:opacity-30 hover:bg-gray-100 transition-all text-gray-700"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <div className="flex items-center gap-2">
-                  {Array.from({ length: totalMockupPages }, (_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setMockupPage(i)}
-                      className={`rounded-full transition-all duration-300 ${i === mockupPage ? "w-6 h-2.5 bg-black" : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-500"}`}
-                    />
-                  ))}
+                  {/* Category badge */}
+                  <span className={`absolute top-4 left-4 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest ${categoryColors[mockup.category]}`}>
+                    {mockup.category}
+                  </span>
+
+                  {/* Bottom content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="font-fraunces text-base font-bold text-white leading-snug">{mockup.title}</p>
+                  </div>
                 </div>
-                <button
-                  onClick={() => setMockupPage((p) => Math.min(totalMockupPages - 1, p + 1))}
-                  disabled={mockupPage === totalMockupPages - 1}
-                  className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center disabled:opacity-30 hover:bg-gray-100 transition-all text-gray-700"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+              ))}
             </div>
           )}
         </div>
