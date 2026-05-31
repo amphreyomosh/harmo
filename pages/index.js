@@ -131,6 +131,7 @@ const mockupProjects = [
   { id: 48, title: "Campus Life Connectors",   category: "Homepage",   href: "https://www.gladtech.io/campus-life-connectors" },
   { id: 49, title: "Children of Promise",      category: "Web Design", href: "https://www.gladtech.io/children-of-promise" },
   { id: 50, title: "CT Catholic",              category: "UI",         href: "https://www.gladtech.io/ctcatholic" },
+  { id: 51, title: "Bradshaw PI",              category: "Web Design", href: "https://bradshaw-pi.vercel.app/" },
 ];
 
 const socialLinks = [
@@ -676,7 +677,7 @@ export default function Home() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-0.5">Design Mockups</p>
-              <p className="font-fraunces text-lg font-semibold text-gray-900">50 Selected Designs</p>
+              <p className="font-fraunces text-lg font-semibold text-gray-900">51 Selected Designs</p>
             </div>
             <div className="flex gap-2">
               <button
