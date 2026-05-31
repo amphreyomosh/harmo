@@ -35,7 +35,7 @@ body {
 
 .ribbon-in-out {
   animation: ribbon-in-out 70s linear infinite;
-  animation-delay: 60s;
+  animation-delay: 40s;
   animation-fill-mode: backwards;
 }
 
