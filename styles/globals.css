@@ -17,17 +17,24 @@ body {
   }
 }
 
-/* Hero ribbon — slides in from left edge, holds 10s, slides back out, repeats every 15s */
+/*
+  Hero ribbon — cycle: 70s total
+  · 0s–0.7s   slide in
+  · 0.7s–8.7s visible (≈ 8s)
+  · 8.7s–9.4s slide out
+  · 9.4s–70s  hidden (≈ 61s gap before next appearance)
+  First appearance: 3s after page load
+*/
 @keyframes ribbon-in-out {
-  0%      { transform: translateX(-100%); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
-  5.33%   { transform: translateX(0);     animation-timing-function: linear; }
-  72%     { transform: translateX(0);     animation-timing-function: cubic-bezier(0.64, 0, 0.78, 0); }
-  77.33%  { transform: translateX(-100%); }
-  100%    { transform: translateX(-100%); }
+  0%   { transform: translateX(-100%); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+  1%   { transform: translateX(0);     animation-timing-function: linear; }
+  12%  { transform: translateX(0);     animation-timing-function: cubic-bezier(0.64, 0, 0.78, 0); }
+  13%  { transform: translateX(-100%); }
+  100% { transform: translateX(-100%); }
 }
 
 .ribbon-in-out {
-  animation: ribbon-in-out 15s linear infinite;
+  animation: ribbon-in-out 70s linear infinite;
   animation-delay: 60s;
   animation-fill-mode: backwards;
 }
