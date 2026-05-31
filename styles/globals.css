@@ -2,18 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/*this is navbar*/
-body{
-  font-family: "Bebas Neue";
+body {
+  font-family: var(--font-poppins), sans-serif;
 }
 #menuOpen {
   font-size: 100px;
-  font-family: "Bebas Neue";
+  font-family: var(--font-fraunces), serif;
 }
 @media (max-width: 768px) {
   #menuOpen {
     font-size: 70px;
-    font-family: "Bebas Neue";
   }
 }
 #home,

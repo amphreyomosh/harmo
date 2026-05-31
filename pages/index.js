@@ -175,7 +175,7 @@ export default function Home() {
         ))}
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-black/60" />
 
         {/* Hero content */}
         <div className="relative z-10 text-white w-full px-6 md:px-16 lg:px-24 pt-28 pb-24 md:pt-0 md:pb-0">
@@ -186,11 +186,11 @@ export default function Home() {
               Available for Work
             </span>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-5">
+            <h1 className="font-fraunces text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-5 [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
               Hi, I&apos;m<br />Humphrey
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 max-w-md leading-relaxed">
+            <p className="font-poppins text-base sm:text-lg md:text-xl text-gray-100 mb-8 max-w-md leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
               A passionate front-end developer crafting amazing user experiences always.
             </p>
 
@@ -297,7 +297,7 @@ export default function Home() {
         }`}
       >
         <div className="md:w-1/2 flex flex-col items-start text-left">
-          <h2 className="text-9xl font-bold text-white mb-4">About Me</h2>
+          <h2 className="font-fraunces text-9xl font-bold text-white mb-4">About Me</h2>
           <p className="text-lg text-white leading-relaxed">
             I am a passionate front-end developer with a strong background in
             web design and development. With a keen eye for aesthetics and
@@ -324,7 +324,7 @@ export default function Home() {
         ref={portfolioRef}
         className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-16"
       >
-        <h2 className="text-4xl font-bold text-gray-600 mb-12">Portfolio</h2>
+        <h2 className="font-fraunces text-4xl font-bold text-gray-600 mb-12">Portfolio</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-8">
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
@@ -333,7 +333,7 @@ export default function Home() {
               className="w-full h-56 object-cover"
             />
             <div className="p-6">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+              <h3 className="font-fraunces text-2xl font-semibold text-gray-800 mb-4">
                 Project One | <i>Meal Site</i>
               </h3>
               <p className="text-gray-600 mb-6">
@@ -358,7 +358,7 @@ export default function Home() {
               className="w-full h-56 object-cover"
             />
             <div className="p-6">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+              <h3 className="font-fraunces text-2xl font-semibold text-gray-800 mb-4">
                 Project Two | <i>Artwork Site</i>
               </h3>
               <p className="text-gray-600 mb-6">
@@ -381,7 +381,7 @@ export default function Home() {
               className="w-full h-56 object-cover"
             />
             <div className="p-6">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+              <h3 className="font-fraunces text-2xl font-semibold text-gray-800 mb-4">
                 Project Three | <i>Dreamsters Site</i>
               </h3>
               <p className="text-gray-600 mb-6">
@@ -405,7 +405,7 @@ export default function Home() {
               className="w-full h-56 object-cover"
             />
             <div className="p-6">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+              <h3 className="font-fraunces text-2xl font-semibold text-gray-800 mb-4">
                 Project Four
               </h3>
               <p className="text-gray-600 mb-6">
@@ -423,7 +423,7 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" ref={contactRef} className="flex flex-col items-center justify-center py-24 px-8 md:px-16 lg:px-24">
-        <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
+        <h2 className="font-fraunces text-4xl font-bold text-white mb-4">Get In Touch</h2>
         <p className="text-lg text-gray-300 mb-10 text-center max-w-xl">
           Have a project in mind or just want to say hi? My inbox is always
           open.
