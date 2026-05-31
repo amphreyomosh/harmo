@@ -17,6 +17,20 @@ body {
   }
 }
 
+/* Hero ribbon — slides in from left edge, holds, slides back out, repeats every 30s */
+@keyframes ribbon-in-out {
+  0%     { transform: translateX(-100%); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+  4%     { transform: translateX(0);     animation-timing-function: linear; }
+  15%    { transform: translateX(0);     animation-timing-function: cubic-bezier(0.64, 0, 0.78, 0); }
+  19%    { transform: translateX(-100%); }
+  100%   { transform: translateX(-100%); }
+}
+
+.ribbon-in-out {
+  animation: ribbon-in-out 30s linear infinite;
+  animation-delay: 1.2s;
+}
+
 @keyframes fade-in {
   0%   { opacity: 0; transform: translateY(30px); }
   100% { opacity: 1; transform: translateY(0); }

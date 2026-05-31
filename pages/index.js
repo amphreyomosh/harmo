@@ -149,9 +149,6 @@ export default function Home() {
   const [isDarkBackground, setIsDarkBackground] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [scrollY, setScrollY] = useState(0);
-  const [activeTab, setActiveTab] = useState("websites");
-  const [liveCanScrollLeft, setLiveCanScrollLeft] = useState(false);
-  const [liveCanScrollRight, setLiveCanScrollRight] = useState(true);
   const [mockupCanScrollLeft, setMockupCanScrollLeft] = useState(false);
   const [mockupCanScrollRight, setMockupCanScrollRight] = useState(true);
   const [aboutSlide, setAboutSlide] = useState(0);
@@ -165,7 +162,6 @@ export default function Home() {
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
   const slideTimerRef = useRef(null);
-  const liveScrollRef = useRef(null);
   const mockupScrollRef = useRef(null);
 
   // Parallax scroll tracking
@@ -219,33 +215,24 @@ export default function Home() {
   }, []);
 
   // Horizontal scroll helpers
-  const checkLiveScroll = () => {
-    const el = liveScrollRef.current;
-    if (!el) return;
-    setLiveCanScrollLeft(el.scrollLeft > 0);
-    setLiveCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
-  };
   const checkMockupScroll = () => {
     const el = mockupScrollRef.current;
     if (!el) return;
     setMockupCanScrollLeft(el.scrollLeft > 0);
     setMockupCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
   };
-  const scrollCards = (ref, dir) => {
-    const el = ref.current;
+  const scrollMockups = (dir) => {
+    const el = mockupScrollRef.current;
     if (!el) return;
     el.scrollBy({ left: dir * Math.round(el.clientWidth * 0.55), behavior: "smooth" });
   };
 
-  // Re-check button states whenever the active tab changes
+  // Check initial scroll state after first paint
   useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      checkLiveScroll();
-      checkMockupScroll();
-    });
+    const frame = requestAnimationFrame(checkMockupScroll);
     return () => cancelAnimationFrame(frame);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
+  }, []);
 
   // Section visibility observers
   useEffect(() => {
@@ -345,10 +332,6 @@ export default function Home() {
 
         <div className="relative z-10 text-white w-full px-6 md:px-16 lg:px-24 pt-20 pb-20 md:pt-0 md:pb-0">
           <div className="max-w-4xl">
-            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gray-300 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              Available for Work
-            </span>
             <h1 className="font-fraunces text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-5 [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
               Your Idea, Built and Launched Properly.
             </h1>
@@ -364,6 +347,16 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
+          </div>
+        </div>
+
+        {/* Available for Work ribbon — left edge slide-in/out */}
+        <div className="fixed left-0 top-[40%] z-50 ribbon-in-out pointer-events-none select-none">
+          <div className="bg-white text-black flex items-center gap-2.5 px-5 py-3 shadow-xl" style={{ borderRadius: 0 }}>
+            <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0 animate-pulse" />
+            <span className="text-xs font-bold uppercase tracking-widest whitespace-nowrap font-poppins">
+              Available for Work
+            </span>
           </div>
         </div>
 
@@ -594,28 +587,68 @@ export default function Home() {
             From fully functional live websites to polished design mockups — here's what I've been building.
           </p>
 
-          {/* Tabs + nav arrows on the same row */}
-          <div className="flex items-center justify-between mb-8 gap-4">
-            <div className="flex gap-1 bg-gray-200 p-1 rounded-full w-fit">
-              <button
-                onClick={() => setActiveTab("websites")}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === "websites" ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-gray-800"}`}
+          {/* ── Four large cards — 2 × 2 grid ── */}
+          <div className="grid sm:grid-cols-2 gap-6 mb-14">
+            {websiteProjects.map((project) => (
+              <div
+                key={project.id}
+                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
               >
-                Live Websites
-              </button>
-              <button
-                onClick={() => setActiveTab("mockups")}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === "mockups" ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-gray-800"}`}
-              >
-                Mockups <span className="opacity-50 ml-0.5 text-xs">18</span>
-              </button>
-            </div>
+                {/* Image */}
+                <div className="relative h-52 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105"
+                  />
+                  <span className="absolute top-3 left-3 bg-black/80 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">
+                    Live
+                  </span>
+                </div>
 
-            {/* Shared prev / next */}
-            <div className="flex gap-2 flex-shrink-0">
+                {/* Content */}
+                <div className="p-6">
+                  <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">{project.label}</p>
+                  <h3 className="font-fraunces text-xl font-bold text-gray-900 mb-2 leading-snug">{project.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-5">{project.description}</p>
+
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex gap-2 flex-wrap">
+                      {project.tech.map((t) => (
+                        <span key={t} className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">{t}</span>
+                      ))}
+                    </div>
+                    {project.link ? (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-black border border-gray-200 px-4 py-2 rounded-full hover:bg-black hover:text-white hover:border-black transition-all duration-200 flex-shrink-0"
+                      >
+                        View Live
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <span className="text-xs text-gray-400 flex-shrink-0">Coming Soon</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* ── Mockups — label + prev/next, then horizontal scroll ── */}
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-0.5">Design Mockups</p>
+              <p className="font-fraunces text-lg font-semibold text-gray-900">18 Selected Designs</p>
+            </div>
+            <div className="flex gap-2">
               <button
-                onClick={() => scrollCards(activeTab === "websites" ? liveScrollRef : mockupScrollRef, -1)}
-                disabled={activeTab === "websites" ? !liveCanScrollLeft : !mockupCanScrollLeft}
+                onClick={() => scrollMockups(-1)}
+                disabled={!mockupCanScrollLeft}
                 className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center disabled:opacity-25 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-200"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -623,8 +656,8 @@ export default function Home() {
                 </svg>
               </button>
               <button
-                onClick={() => scrollCards(activeTab === "websites" ? liveScrollRef : mockupScrollRef, 1)}
-                disabled={activeTab === "websites" ? !liveCanScrollRight : !mockupCanScrollRight}
+                onClick={() => scrollMockups(1)}
+                disabled={!mockupCanScrollRight}
                 className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center disabled:opacity-25 hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all duration-200"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -634,89 +667,33 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ── Live Websites — horizontal scroll ── */}
-          {activeTab === "websites" && (
-            <div
-              ref={liveScrollRef}
-              onScroll={checkLiveScroll}
-              className="flex gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {websiteProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className="relative flex-none w-[270px] sm:w-[300px] h-[480px] rounded-2xl overflow-hidden group cursor-pointer"
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+          <div
+            ref={mockupScrollRef}
+            onScroll={checkMockupScroll}
+            className="flex gap-3 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {mockupProjects.map((mockup) => (
+              <div
+                key={mockup.id}
+                className="relative flex-none w-[170px] sm:w-[190px] h-[250px] rounded-xl overflow-hidden group cursor-pointer"
+              >
+                <img
+                  src={mockup.image}
+                  alt={mockup.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
 
-                  {/* Badge */}
-                  <span className="absolute top-4 left-4 bg-white text-black text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest">
-                    Live
-                  </span>
+                <span className={`absolute top-3 left-3 text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest ${categoryColors[mockup.category]}`}>
+                  {mockup.category}
+                </span>
 
-                  {/* Bottom content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="text-white/50 text-[10px] uppercase tracking-widest mb-1.5">{project.label}</p>
-                    <h3 className="font-fraunces text-xl font-bold text-white mb-3 leading-snug">{project.title}</h3>
-                    {project.link ? (
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors"
-                      >
-                        <span className="w-7 h-7 rounded-full border border-white/50 flex items-center justify-center group-hover:border-white transition-colors">
-                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </span>
-                        View Live
-                      </a>
-                    ) : (
-                      <span className="text-white/40 text-sm">Coming Soon</span>
-                    )}
-                  </div>
+                <div className="absolute bottom-0 left-0 right-0 p-3">
+                  <p className="font-fraunces text-sm font-bold text-white leading-snug">{mockup.title}</p>
                 </div>
-              ))}
-            </div>
-          )}
-
-          {/* ── Mockups — horizontal scroll ── */}
-          {activeTab === "mockups" && (
-            <div
-              ref={mockupScrollRef}
-              onScroll={checkMockupScroll}
-              className="flex gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {mockupProjects.map((mockup) => (
-                <div
-                  key={mockup.id}
-                  className="relative flex-none w-[220px] sm:w-[240px] h-[360px] rounded-2xl overflow-hidden group cursor-pointer"
-                >
-                  <img
-                    src={mockup.image}
-                    alt={mockup.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                  {/* Category badge */}
-                  <span className={`absolute top-4 left-4 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-widest ${categoryColors[mockup.category]}`}>
-                    {mockup.category}
-                  </span>
-
-                  {/* Bottom content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="font-fraunces text-base font-bold text-white leading-snug">{mockup.title}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
