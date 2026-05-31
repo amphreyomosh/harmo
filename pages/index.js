@@ -1,15 +1,57 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+
+const heroSlides = [
+  "https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?w=1920&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&auto=format&fit=crop&q=80",
+];
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkBackground, setIsDarkBackground] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const aboutRef = useRef(null);
   const portfolioRef = useRef(null);
   const contactRef = useRef(null);
   const lastScrollY = useRef(0);
+  const slideTimerRef = useRef(null);
   const [aboutSectionVisible, setAboutSectionVisible] = useState(false);
+
+  const startAutoPlay = useCallback(() => {
+    slideTimerRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+  }, []);
+
+  const stopAutoPlay = useCallback(() => {
+    if (slideTimerRef.current) clearInterval(slideTimerRef.current);
+  }, []);
+
+  const goToSlide = useCallback(
+    (index) => {
+      stopAutoPlay();
+      setCurrentSlide(index);
+      startAutoPlay();
+    },
+    [stopAutoPlay, startAutoPlay]
+  );
+
+  const goNext = useCallback(
+    () => goToSlide((currentSlide + 1) % heroSlides.length),
+    [currentSlide, goToSlide]
+  );
+
+  const goPrev = useCallback(
+    () => goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length),
+    [currentSlide, goToSlide]
+  );
+
+  useEffect(() => {
+    startAutoPlay();
+    return stopAutoPlay;
+  }, [startAutoPlay, stopAutoPlay]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,44 +161,131 @@ export default function Home() {
       </div>
 
       {/* Home Section */}
-      <section
-        id="home"
-        className="relative flex items-center min-h-screen pt-24 px-8 md:px-16 lg:px-24"
-      >
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1494587351196-bbf5f29cff42?w=1920&auto=format&fit=crop&q=100&ixlib=rb-4.0.3')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="relative z-10 text-white max-w-2xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Hi, I&apos;m Humphrey
-          </h1>
-          <p className="text-lg md:text-2xl mb-6 animate-fade-in delay-200">
-            A passionate front-end developer crafting amazing user experiences
-            always.
-          </p>
-          <a
-            href="#portfolio"
-            className="inline-block bg-white text-black font-semibold px-6 py-3 text-lg rounded-lg shadow-lg hover:bg-gray-300 transition-all duration-300 animate-fade-in delay-400"
-          >
-            View My Work
-          </a>
+      <section id="home" className="relative flex items-center min-h-screen overflow-hidden">
+        {/* Carousel background slides */}
+        {heroSlides.map((src, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000"
+            style={{
+              backgroundImage: `url('${src}')`,
+              opacity: i === currentSlide ? 1 : 0,
+            }}
+          />
+        ))}
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/55" />
+
+        {/* Hero content */}
+        <div className="relative z-10 text-white w-full px-6 md:px-16 lg:px-24 pt-28 pb-24 md:pt-0 md:pb-0">
+          <div className="max-w-2xl">
+            {/* Availability badge */}
+            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gray-300 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-full mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Available for Work
+            </span>
+
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-5">
+              Hi, I&apos;m<br />Humphrey
+            </h1>
+
+            <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 max-w-md leading-relaxed">
+              A passionate front-end developer crafting amazing user experiences always.
+            </p>
+
+            <a
+              href="mailto:amphreyomosh2001@gmail.com"
+              className="inline-flex items-center gap-2.5 bg-white text-black font-semibold px-7 py-3.5 text-base rounded-full shadow-xl hover:bg-gray-100 hover:scale-105 active:scale-95 transition-all duration-300"
+            >
+              Get in Touch
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
         </div>
-        <div className="hidden md:block absolute right-12 bottom-12 z-10">
-          <a
-            href="#contact"
-            className="bg-white text-black font-semibold px-5 py-3 text-lg rounded-full shadow-lg hover:bg-gray-300 transition-all duration-300"
+
+        {/* Desktop — vertical nav stack on far right */}
+        <div className="hidden md:flex flex-col items-center gap-3 absolute right-10 top-1/2 -translate-y-1/2 z-10">
+          <button
+            onClick={goPrev}
+            aria-label="Previous slide"
+            className="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center"
           >
-            Let&apos;s Connect
-          </a>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 15l7-7 7 7" />
+            </svg>
+          </button>
+
+          <div className="flex flex-col items-center gap-2 py-1">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToSlide(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  i === currentSlide
+                    ? "w-2 h-7 bg-white"
+                    : "w-2 h-2 bg-white/40 hover:bg-white/70"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={goNext}
+            aria-label="Next slide"
+            className="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
         </div>
+
+        {/* Desktop — slide counter bottom right */}
+        <div className="hidden md:flex items-baseline gap-1 absolute bottom-8 right-12 z-10 text-white/60 text-sm font-mono">
+          <span className="text-white text-base font-semibold">
+            {String(currentSlide + 1).padStart(2, "0")}
+          </span>
+          <span className="mx-0.5">/</span>
+          <span>{String(heroSlides.length).padStart(2, "0")}</span>
+        </div>
+
+        {/* Mobile — horizontal dots at bottom center */}
+        <div className="flex md:hidden items-center gap-2 absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToSlide(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`rounded-full transition-all duration-300 ${
+                i === currentSlide ? "w-7 h-2.5 bg-white" : "w-2.5 h-2.5 bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Mobile — left/right arrow buttons at bottom corners */}
+        <button
+          onClick={goPrev}
+          aria-label="Previous slide"
+          className="flex md:hidden absolute bottom-6 left-6 z-10 w-10 h-10 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white items-center justify-center"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button
+          onClick={goNext}
+          aria-label="Next slide"
+          className="flex md:hidden absolute bottom-6 right-6 z-10 w-10 h-10 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white items-center justify-center"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </section>
 
       {/* About Section */}
