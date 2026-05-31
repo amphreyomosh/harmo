@@ -55,6 +55,25 @@ const websiteProjects = [
   },
 ];
 
+const aboutSlides = [
+  {
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&auto=format&fit=crop&q=80",
+    caption: "Developing digital experiences",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80",
+    caption: "Training the next generation",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=900&auto=format&fit=crop&q=80",
+    caption: "Designing with purpose",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&auto=format&fit=crop&q=80",
+    caption: "Exploring AI & innovation",
+  },
+];
+
 const mockupCategories = [
   "Web Design",
   "UI/UX",
@@ -125,11 +144,14 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTab, setActiveTab] = useState("websites");
   const [mockupPage, setMockupPage] = useState(0);
+  const [aboutSlide, setAboutSlide] = useState(0);
   const [aboutVisible, setAboutVisible] = useState(false);
+  const [aboutRow2Visible, setAboutRow2Visible] = useState(false);
   const [projectsVisible, setProjectsVisible] = useState(false);
   const [contactVisible, setContactVisible] = useState(false);
 
   const aboutRef = useRef(null);
+  const aboutRow2Ref = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
   const slideTimerRef = useRef(null);
@@ -182,28 +204,38 @@ export default function Home() {
     return stopAutoPlay;
   }, [startAutoPlay, stopAutoPlay]);
 
+  // About section slideshow auto-advance
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAboutSlide((p) => (p + 1) % aboutSlides.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
   // Section visibility observers
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const { id } = entry.target;
-          // Only the projects section is light — darken the hamburger icon there
           if (id === "projects") setIsDarkBackground(entry.isIntersecting);
           if (id === "about") setAboutVisible(entry.isIntersecting);
           if (id === "projects") setProjectsVisible(entry.isIntersecting);
           if (id === "contact") setContactVisible(entry.isIntersecting);
+          if (entry.target === aboutRow2Ref.current) setAboutRow2Visible(entry.isIntersecting);
         });
       },
       { threshold: 0.15 }
     );
 
     if (aboutRef.current) observer.observe(aboutRef.current);
+    if (aboutRow2Ref.current) observer.observe(aboutRow2Ref.current);
     if (projectsRef.current) observer.observe(projectsRef.current);
     if (contactRef.current) observer.observe(contactRef.current);
 
     return () => {
       if (aboutRef.current) observer.unobserve(aboutRef.current);
+      if (aboutRow2Ref.current) observer.unobserve(aboutRow2Ref.current);
       if (projectsRef.current) observer.unobserve(projectsRef.current);
       if (contactRef.current) observer.unobserve(contactRef.current);
     };
@@ -353,7 +385,7 @@ export default function Home() {
       <section
         id="about"
         ref={aboutRef}
-        className="relative min-h-screen flex items-center overflow-hidden bg-[rgb(18,18,18)]"
+        className="relative overflow-hidden bg-[rgb(18,18,18)]"
       >
         {/* Parallax dot grid */}
         <div
@@ -365,42 +397,138 @@ export default function Home() {
           }}
         />
 
-        <div className="relative z-10 w-full grid md:grid-cols-2 gap-12 lg:gap-20 items-center px-6 md:px-16 lg:px-24 py-24">
-          {/* Text — slides in from left */}
-          <div className={`transition-all duration-1000 ${aboutVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}>
-            <span className="text-xs uppercase tracking-widest text-gray-500 mb-4 block">About Me</span>
-            <h2 className="font-fraunces text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              Creating Impact Through<br />Technology and Education.
-            </h2>
-            <p className="text-gray-300 text-base leading-relaxed mb-4">
-              Technology has always been more than code and tools to me. What excites me most is helping people understand how technology can solve real problems and create new opportunities. Over the years, I have focused on exploring Artificial Intelligence, web development, user experience, and digital innovation — constantly looking for practical ways to turn complex ideas into simple solutions.
-            </p>
-            <p className="text-gray-300 text-base leading-relaxed mb-4">
-              My work combines technology and education. I enjoy training students, guiding beginners, and designing learning experiences that make AI and digital skills accessible to everyone. Whether I&apos;m leading a workshop, building a project, or experimenting with new tools, my goal is always the same: to transform knowledge into something useful, actionable, and impactful.
-            </p>
-            <p className="text-gray-300 text-base leading-relaxed mb-8">
-              I believe the future belongs to people who can learn, adapt, and work alongside emerging technologies. That belief drives me to keep learning, building, and sharing what I discover. When I&apos;m not building or teaching, you&apos;ll find me exploring new AI tools, refining ideas, and searching for better ways to bridge the gap between technology and human potential.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {["WordPress", "Squarespace", "UI Design", "Web Design & Dev", "Trainer in Tech"].map((skill) => (
-                <span key={skill} className="text-xs border border-white/20 text-gray-300 px-3 py-1.5 rounded-full hover:border-white/50 transition-colors cursor-default">
-                  {skill}
-                </span>
-              ))}
+        <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pt-24 pb-0">
+
+          {/* ── Row 1: text left · image right ─────────────────────────────── */}
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center pb-20">
+
+            {/* Text column */}
+            <div className={`transition-all duration-1000 ${aboutVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}>
+              <span className="text-xs uppercase tracking-widest text-gray-500 mb-4 block">About Me</span>
+              <h2 className="font-fraunces text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                Creating Impact Through<br />Technology and Education.
+              </h2>
+              <p className="text-gray-300 text-base leading-relaxed mb-4">
+                Technology has always been more than code and tools to me. What excites me most is helping people understand how technology can solve real problems and create new opportunities. Over the years, I have focused on exploring Artificial Intelligence, web development, user experience, and digital innovation — constantly looking for practical ways to turn complex ideas into simple solutions.
+              </p>
+              <p className="text-gray-300 text-base leading-relaxed mb-4">
+                My work combines technology and education. I enjoy training students, guiding beginners, and designing learning experiences that make AI and digital skills accessible to everyone. Whether I&apos;m leading a workshop, building a project, or experimenting with new tools, my goal is always the same: to transform knowledge into something useful, actionable, and impactful.
+              </p>
+              <p className="text-gray-300 text-base leading-relaxed mb-8">
+                I believe the future belongs to people who can learn, adapt, and work alongside emerging technologies. That belief drives me to keep learning, building, and sharing what I discover. When I&apos;m not building or teaching, you&apos;ll find me exploring new AI tools and searching for better ways to bridge the gap between technology and human potential.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["WordPress", "Squarespace", "UI Design", "Web Design & Dev", "Trainer in Tech"].map((skill) => (
+                  <span key={skill} className="text-xs border border-white/20 text-gray-300 px-3 py-1.5 rounded-full hover:border-white/50 transition-colors cursor-default">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Image column — inner parallax */}
+            <div className={`transition-all duration-1000 delay-200 ${aboutVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"}`}>
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  src="https://media.istockphoto.com/id/183766364/photo/portrait-of-a-faceless-man.webp?a=1&b=1&s=612x612&w=0&k=20&c=487iEyJGi7hMSti8b3ocY5mbXoL20uH6IulaQbYzDcQ="
+                  alt="Humphrey"
+                  className="w-full h-[420px] md:h-[520px] object-cover"
+                  style={{ transform: `scale(1.06) translateY(${scrollY * 0.025}px)` }}
+                />
+              </div>
             </div>
           </div>
 
-          {/* Image — slides in from right, inner parallax */}
-          <div className={`transition-all duration-1000 delay-200 ${aboutVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"}`}>
-            <div className="overflow-hidden rounded-2xl">
-              <img
-                src="https://media.istockphoto.com/id/183766364/photo/portrait-of-a-faceless-man.webp?a=1&b=1&s=612x612&w=0&k=20&c=487iEyJGi7hMSti8b3ocY5mbXoL20uH6IulaQbYzDcQ="
-                alt="Humphrey"
-                className="w-full h-[420px] md:h-[500px] object-cover"
-                style={{ transform: `scale(1.06) translateY(${scrollY * 0.025}px)` }}
-              />
+          {/* ── Divider ─────────────────────────────────────────────────────── */}
+          <div className="border-t border-white/10" />
+
+          {/* ── Row 2: slideshow left · story text right ────────────────────── */}
+          <div
+            ref={aboutRow2Ref}
+            className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center py-20"
+          >
+            {/* Mini slideshow */}
+            <div className={`transition-all duration-1000 ${aboutRow2Visible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}>
+              <div className="relative rounded-2xl overflow-hidden h-72 md:h-[420px] group">
+                {/* Slides */}
+                {aboutSlides.map((slide, i) => (
+                  <div
+                    key={i}
+                    className={`absolute inset-0 transition-opacity duration-700 ${i === aboutSlide ? "opacity-100" : "opacity-0"}`}
+                  >
+                    <img
+                      src={slide.image}
+                      alt={slide.caption}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <p className="absolute bottom-12 left-5 text-white text-sm font-medium tracking-wide">
+                      {slide.caption}
+                    </p>
+                  </div>
+                ))}
+
+                {/* Hover arrows */}
+                <button
+                  onClick={() => setAboutSlide((p) => (p - 1 + aboutSlides.length) % aboutSlides.length)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setAboutSlide((p) => (p + 1) % aboutSlides.length)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Slide dots */}
+                <div className="absolute bottom-4 left-5 flex gap-1.5">
+                  {aboutSlides.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setAboutSlide(i)}
+                      className={`rounded-full transition-all duration-300 ${i === aboutSlide ? "w-5 h-2 bg-white" : "w-2 h-2 bg-white/50 hover:bg-white/80"}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Story text */}
+            <div className={`transition-all duration-1000 delay-200 ${aboutRow2Visible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"}`}>
+              <span className="text-xs uppercase tracking-widest text-gray-500 mb-4 block">The Journey</span>
+              <h3 className="font-fraunces text-3xl md:text-4xl font-bold text-white mb-5 leading-tight">
+                Building, Teaching,<br />Repeating.
+              </h3>
+              <p className="text-gray-300 text-base leading-relaxed mb-4">
+                Every project begins with a question: what does success look like for you? That question shapes everything — the design choices, the tools, the way I train or build. There are no shortcuts when quality is the standard.
+              </p>
+              <p className="text-gray-300 text-base leading-relaxed mb-8">
+                From workshops and training sessions to live websites and design systems, I&apos;ve spent years working at the intersection of building and teaching. These images capture moments from that ongoing journey — proof that great work is rarely finished; it just keeps evolving.
+              </p>
+
+              {/* Highlights grid */}
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  "50+ Students Trained",
+                  "20+ Projects Delivered",
+                  "AI Tools Explorer",
+                  "Workshop Facilitator",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2.5 p-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/8 hover:border-white/20 transition-colors">
+                    <span className="text-white/40 mt-0.5">✦</span>
+                    <span className="text-gray-300 text-xs leading-snug">{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+
         </div>
       </section>
 
