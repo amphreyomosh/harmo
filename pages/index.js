@@ -399,12 +399,16 @@ export default function Home() {
 
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pt-24 pb-0">
 
+          {/* About Me — centered eyebrow */}
+          <p className={`text-xs uppercase tracking-widest text-gray-500 text-center mb-10 transition-all duration-700 ${aboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            About Me
+          </p>
+
           {/* ── Row 1: text left · image right ─────────────────────────────── */}
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center pb-20">
 
             {/* Text column */}
             <div className={`transition-all duration-1000 ${aboutVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}>
-              <span className="text-xs uppercase tracking-widest text-gray-500 mb-4 block">About Me</span>
               <h2 className="font-fraunces text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Creating Impact Through<br />Technology and Education.
               </h2>
@@ -442,10 +446,15 @@ export default function Home() {
           {/* ── Divider ─────────────────────────────────────────────────────── */}
           <div className="border-t border-white/10" />
 
+          {/* The Journey — centered eyebrow */}
+          <p className={`text-xs uppercase tracking-widest text-gray-500 text-center mt-16 mb-10 transition-all duration-700 ${aboutRow2Visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            The Journey
+          </p>
+
           {/* ── Row 2: slideshow left · story text right ────────────────────── */}
           <div
             ref={aboutRow2Ref}
-            className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center py-20"
+            className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center pb-20"
           >
             {/* Mini slideshow */}
             <div className={`transition-all duration-1000 ${aboutRow2Visible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}>
@@ -501,7 +510,6 @@ export default function Home() {
 
             {/* Story text */}
             <div className={`transition-all duration-1000 delay-200 ${aboutRow2Visible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"}`}>
-              <span className="text-xs uppercase tracking-widest text-gray-500 mb-4 block">The Journey</span>
               <h3 className="font-fraunces text-3xl md:text-4xl font-bold text-white mb-5 leading-tight">
                 Building, Teaching,<br />Repeating.
               </h3>
@@ -541,9 +549,9 @@ export default function Home() {
         className="min-h-screen bg-gray-50 py-24 px-6 md:px-16 lg:px-24"
       >
         <div className="max-w-7xl mx-auto">
-          <span className={`text-xs uppercase tracking-widest text-gray-400 mb-4 block transition-all duration-700 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <p className={`text-xs uppercase tracking-widest text-gray-400 mb-4 text-center transition-all duration-700 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             My Work
-          </span>
+          </p>
           <h2 className={`font-fraunces text-4xl md:text-5xl font-bold text-gray-900 mb-3 transition-all duration-700 delay-100 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             Selected Projects.
           </h2>
@@ -695,11 +703,15 @@ export default function Home() {
         />
 
         <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 py-24">
+          {/* Let's Talk — centered eyebrow */}
+          <p className={`text-xs uppercase tracking-widest text-gray-500 text-center mb-12 transition-all duration-700 ${contactVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            Let&apos;s Talk
+          </p>
+
           <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
 
             {/* Left: text + CTA — slides in from left */}
             <div className={`transition-all duration-1000 ${contactVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}>
-              <span className="text-xs uppercase tracking-widest text-gray-500 mb-4 block">Let's Talk</span>
               <h2 className="font-fraunces text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Let's Build Something<br />Great Together.
               </h2>
