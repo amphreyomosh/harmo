@@ -370,16 +370,19 @@ export default function Home() {
           <div className={`transition-all duration-1000 ${aboutVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"}`}>
             <span className="text-xs uppercase tracking-widest text-gray-500 mb-4 block">About Me</span>
             <h2 className="font-fraunces text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              The Developer<br />Behind the Work.
+              Creating Impact Through<br />Technology and Education.
             </h2>
             <p className="text-gray-300 text-base leading-relaxed mb-4">
-              I am a passionate front-end developer with a strong background in web design and development. With a keen eye for aesthetics and functionality, I create seamless user experiences that bring ideas to life.
+              Technology has always been more than code and tools to me. What excites me most is helping people understand how technology can solve real problems and create new opportunities. Over the years, I have focused on exploring Artificial Intelligence, web development, user experience, and digital innovation — constantly looking for practical ways to turn complex ideas into simple solutions.
+            </p>
+            <p className="text-gray-300 text-base leading-relaxed mb-4">
+              My work combines technology and education. I enjoy training students, guiding beginners, and designing learning experiences that make AI and digital skills accessible to everyone. Whether I&apos;m leading a workshop, building a project, or experimenting with new tools, my goal is always the same: to transform knowledge into something useful, actionable, and impactful.
             </p>
             <p className="text-gray-300 text-base leading-relaxed mb-8">
-              My expertise includes React, Next.js, and WordPress, enabling me to build modern, dynamic websites. I am dedicated to continuous learning and innovation in the digital space.
+              I believe the future belongs to people who can learn, adapt, and work alongside emerging technologies. That belief drives me to keep learning, building, and sharing what I discover. When I&apos;m not building or teaching, you&apos;ll find me exploring new AI tools, refining ideas, and searching for better ways to bridge the gap between technology and human potential.
             </p>
             <div className="flex flex-wrap gap-2">
-              {["React", "Next.js", "WordPress", "Tailwind CSS", "UI Design", "JavaScript"].map((skill) => (
+              {["WordPress", "Squarespace", "UI Design", "Web Design & Dev", "Trainer in Tech"].map((skill) => (
                 <span key={skill} className="text-xs border border-white/20 text-gray-300 px-3 py-1.5 rounded-full hover:border-white/50 transition-colors cursor-default">
                   {skill}
                 </span>
