@@ -351,7 +351,7 @@ export default function Home() {
         </div>
 
         {/* Available for Work ribbon — left edge slide-in/out */}
-        <div className="fixed left-0 top-[40%] z-50 ribbon-in-out pointer-events-none select-none">
+        <div className="fixed left-0 top-[18%] z-50 ribbon-in-out pointer-events-none select-none">
           <div className="bg-white text-black flex items-center gap-2.5 px-5 py-3 shadow-xl" style={{ borderRadius: 0 }}>
             <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0 animate-pulse" />
             <span className="text-xs font-bold uppercase tracking-widest whitespace-nowrap font-poppins">
