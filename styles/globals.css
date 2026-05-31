@@ -28,7 +28,8 @@ body {
 
 .ribbon-in-out {
   animation: ribbon-in-out 15s linear infinite;
-  animation-delay: 1.2s;
+  animation-delay: 60s;
+  animation-fill-mode: backwards;
 }
 
 @keyframes fade-in {
