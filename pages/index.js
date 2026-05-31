@@ -352,8 +352,7 @@ export default function Home() {
 
         {/* Available for Work ribbon — left edge slide-in/out */}
         <div className="fixed left-0 top-[18%] z-50 ribbon-in-out pointer-events-none select-none">
-          <div className="bg-white text-black flex items-center gap-2.5 px-5 py-3 shadow-xl rounded-r-2xl">
-            <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0 animate-pulse" />
+          <div className="bg-white text-black flex items-center px-6 py-3.5 shadow-xl rounded-r-full">
             <span className="text-xs font-bold uppercase tracking-widest whitespace-nowrap font-poppins">
               Available for Work
             </span>
