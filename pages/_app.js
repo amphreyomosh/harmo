@@ -1,9 +1,9 @@
-import { Luckiest_Guy, Poppins } from 'next/font/google';
+import { Playfair_Display, Poppins } from 'next/font/google';
 import '../styles/globals.css';
 
-const fraunces = Luckiest_Guy({
+const fraunces = Playfair_Display({
   subsets: ['latin'],
-  weight: '400',
+  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-fraunces',
   display: 'swap',
 });
