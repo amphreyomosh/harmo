@@ -161,7 +161,7 @@ export default function Home() {
       </div>
 
       {/* Home Section */}
-      <section id="home" className="relative flex items-center min-h-screen overflow-hidden">
+      <section id="home" className="relative flex items-center min-h-[100dvh] overflow-hidden">
         {/* Carousel background slides */}
         {heroSlides.map((src, i) => (
           <div
@@ -178,7 +178,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/60" />
 
         {/* Hero content */}
-        <div className="relative z-10 text-white w-full px-6 md:px-16 lg:px-24 pt-28 pb-24 md:pt-0 md:pb-0">
+        <div className="relative z-10 text-white w-full px-6 md:px-16 lg:px-24 pt-20 pb-20 md:pt-0 md:pb-0">
           <div className="max-w-2xl">
             {/* Availability badge */}
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-gray-300 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-full mb-6">
@@ -186,12 +186,12 @@ export default function Home() {
               Available for Work
             </span>
 
-            <h1 className="font-fraunces text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-5 [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
-              Hi, I&apos;m<br />Humphrey
+            <h1 className="font-fraunces text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-5 [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
+              Your Idea, Built and<br />Launched Properly.
             </h1>
 
-            <p className="font-poppins text-base sm:text-lg md:text-xl text-gray-100 mb-8 max-w-md leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
-              A passionate front-end developer crafting amazing user experiences always.
+            <p className="font-poppins text-sm sm:text-base md:text-xl text-gray-100 mb-8 max-w-md leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+              Frontend development and design for founders who care about quality.
             </p>
 
             <a
