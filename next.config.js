@@ -1,8 +1,9 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost'],
-    unoptimized: false,
+    remotePatterns: [
+      { protocol: 'http', hostname: 'localhost' },
+    ],
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
