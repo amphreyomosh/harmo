@@ -74,30 +74,64 @@ const aboutSlides = [
   },
 ];
 
-const mockupCategories = [
-  "Web Design",
-  "UI/UX",
-  "Landing Page",
-  "Dashboard",
-  "Mobile App",
-  "Brand Identity",
-];
-
 const categoryColors = {
-  "Web Design":     "bg-blue-500",
-  "UI/UX":          "bg-violet-500",
-  "Landing Page":   "bg-orange-500",
-  "Dashboard":      "bg-teal-500",
-  "Mobile App":     "bg-rose-500",
-  "Brand Identity": "bg-amber-500",
+  "Homepage":   "bg-blue-500",
+  "Web Design": "bg-violet-500",
+  "UI":         "bg-orange-500",
 };
 
-const mockupProjects = Array.from({ length: 18 }, (_, i) => ({
-  id: i + 1,
-  title: `Design ${i + 1}`,
-  category: mockupCategories[i % 6],
-  image: `https://picsum.photos/seed/hm${i + 1}/800/500`,
-}));
+const mockupProjects = [
+  { id: 1,  title: "Consumer Federation",     category: "Web Design", href: "https://www.gladtech.io/consumerfederation" },
+  { id: 2,  title: "Daughters of Zion",       category: "Homepage",   href: "https://www.gladtech.io/daughters-of-zion" },
+  { id: 3,  title: "Davis Water Club Polo",   category: "Homepage",   href: "https://www.gladtech.io/davis-water-club-polo" },
+  { id: 4,  title: "Dot Dot",                 category: "UI",         href: "https://www.gladtech.io/dot-dot" },
+  { id: 5,  title: "Excelerate Foundation",   category: "Web Design", href: "https://www.gladtech.io/excelerate-foundation" },
+  { id: 6,  title: "Escape Velocity",         category: "UI",         href: "https://www.gladtech.io/escape-velocity" },
+  { id: 7,  title: "Faithfools",              category: "Homepage",   href: "https://www.gladtech.io/faithfools" },
+  { id: 8,  title: "Farmers Market Coalition",category: "Web Design", href: "https://www.gladtech.io/farmers-market-coalition" },
+  { id: 9,  title: "FDAC",                    category: "Web Design", href: "https://www.gladtech.io/fdac" },
+  { id: 10, title: "Fulton Avenue",           category: "Homepage",   href: "https://www.gladtech.io/fulton-avenue" },
+  { id: 11, title: "Globaltrans Safety",      category: "Web Design", href: "https://www.gladtech.io/globaltrans-safety" },
+  { id: 12, title: "IMBA",                    category: "UI",         href: "https://www.gladtech.io/imba" },
+  { id: 13, title: "Basset Rescue",           category: "Homepage",   href: "https://www.gladtech.io/basset-rescue" },
+  { id: 14, title: "Greentech Education",     category: "Web Design", href: "https://www.gladtech.io/greentech-education" },
+  { id: 15, title: "IASD",                    category: "UI",         href: "https://www.gladtech.io/iasd" },
+  { id: 16, title: "Italian Center",          category: "Homepage",   href: "https://www.gladtech.io/italian-center" },
+  { id: 17, title: "IWF",                     category: "Web Design", href: "https://www.gladtech.io/iwf" },
+  { id: 18, title: "Twelvebridges Rhino",       category: "UI",         href: "https://www.gladtech.io/twelvebridges-rhino" },
+  { id: 19, title: "AFM Local 12",             category: "Homepage",   href: "https://www.gladtech.io/afmlocal12" },
+  { id: 20, title: "Ancil Hoffman Golf Club",  category: "Web Design", href: "https://www.gladtech.io/ancilhoffman-golf-club" },
+  { id: 21, title: "Polo Club",                category: "Homepage",   href: "https://www.gladtech.io/polo-club" },
+  { id: 22, title: "Animal Rescue Squad",      category: "Homepage",   href: "https://www.gladtech.io/animal-rescue-squad" },
+  { id: 23, title: "Aqua Monsters",            category: "UI",         href: "https://www.gladtech.io/aqua-monsters" },
+  { id: 24, title: "ACBO",                     category: "Web Design", href: "https://www.gladtech.io/acbo" },
+  { id: 25, title: "Roseville",                category: "Homepage",   href: "https://www.gladtech.io/roseville" },
+  { id: 26, title: "Decathlon",                category: "UI",         href: "https://www.gladtech.io/decathlon" },
+  { id: 27, title: "Broken Chain",             category: "Web Design", href: "https://www.gladtech.io/broken-chain" },
+  { id: 28, title: "California Museum",        category: "Homepage",   href: "https://www.gladtech.io/california-museum" },
+  { id: 29, title: "CAA",                      category: "Web Design", href: "https://www.gladtech.io/caa" },
+  { id: 30, title: "CAPRED",                   category: "UI",         href: "https://www.gladtech.io/capred" },
+  { id: 31, title: "CAPSES",                   category: "Homepage",   href: "https://www.gladtech.io/capses" },
+  { id: 32, title: "CARPD",                    category: "Web Design", href: "https://www.gladtech.io/carpd" },
+  { id: 33, title: "Capital Network",          category: "UI",         href: "https://www.gladtech.io/capital-network" },
+  { id: 34, title: "Flood Association",        category: "Homepage",   href: "https://www.gladtech.io/flood-association" },
+  { id: 35, title: "California Citrus",        category: "Web Design", href: "https://www.gladtech.io/california-citrus" },
+  { id: 36, title: "CERA",                     category: "UI",         href: "https://www.gladtech.io/cera" },
+  { id: 37, title: "CFWC",                     category: "Homepage",   href: "https://www.gladtech.io/cfwc" },
+  { id: 38, title: "CFOT",                     category: "Web Design", href: "https://www.gladtech.io/cfot" },
+  { id: 39, title: "CFSA",                     category: "UI",         href: "https://www.gladtech.io/cfsa" },
+  { id: 40, title: "Cal Hospice",              category: "Homepage",   href: "https://www.gladtech.io/calhospice" },
+  { id: 41, title: "CIF",                      category: "Web Design", href: "https://www.gladtech.io/cif" },
+  { id: 42, title: "Activated Ministries",     category: "Homepage",   href: "https://www.gladtech.io/activated-ministries" },
+  { id: 43, title: "CALPSC",                   category: "UI",         href: "https://www.gladtech.io/calpsc" },
+  { id: 44, title: "CNSO",                     category: "Web Design", href: "https://www.gladtech.io/cnso" },
+  { id: 45, title: "CSSSC",                    category: "Homepage",   href: "https://www.gladtech.io/csssc" },
+  { id: 46, title: "Elk Grove Educators",      category: "Web Design", href: "https://www.gladtech.io/elkgrooveeducators" },
+  { id: 47, title: "CSOAA",                    category: "UI",         href: "https://www.gladtech.io/csoaa" },
+  { id: 48, title: "Campus Life Connectors",   category: "Homepage",   href: "https://www.gladtech.io/campus-life-connectors" },
+  { id: 49, title: "Children of Promise",      category: "Web Design", href: "https://www.gladtech.io/children-of-promise" },
+  { id: 50, title: "CT Catholic",              category: "UI",         href: "https://www.gladtech.io/ctcatholic" },
+];
 
 const socialLinks = [
   {
@@ -642,7 +676,7 @@ export default function Home() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-0.5">Design Mockups</p>
-              <p className="font-fraunces text-lg font-semibold text-gray-900">18 Selected Designs</p>
+              <p className="font-fraunces text-lg font-semibold text-gray-900">50 Selected Designs</p>
             </div>
             <div className="flex gap-2">
               <button
@@ -672,12 +706,15 @@ export default function Home() {
             className="flex gap-3 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {mockupProjects.map((mockup) => (
-              <div
+              <a
                 key={mockup.id}
+                href={mockup.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative flex-none w-[170px] sm:w-[190px] h-[250px] rounded-xl overflow-hidden group cursor-pointer"
               >
                 <img
-                  src={mockup.image}
+                  src={`https://image.thum.io/get/width/800/crop/500/${mockup.href}`}
                   alt={mockup.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -690,7 +727,7 @@ export default function Home() {
                 <div className="absolute bottom-0 left-0 right-0 p-3">
                   <p className="font-fraunces text-sm font-bold text-white leading-snug">{mockup.title}</p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
