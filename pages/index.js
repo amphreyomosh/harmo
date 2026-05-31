@@ -168,12 +168,6 @@ export default function Home() {
   const liveScrollRef = useRef(null);
   const mockupScrollRef = useRef(null);
 
-  const totalMockupPages = Math.ceil(mockupProjects.length / MOCKUPS_PER_PAGE);
-  const currentMockups = mockupProjects.slice(
-    mockupPage * MOCKUPS_PER_PAGE,
-    (mockupPage + 1) * MOCKUPS_PER_PAGE
-  );
-
   // Parallax scroll tracking
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
