@@ -1,32 +1,18 @@
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
-// Lazy load components
-const AboutSection = lazy(() => import('./components/AboutSection'));
-const PortfolioSection = lazy(() => import('./components/PortfolioSection'));
-const ContactSection = lazy(() => import('./components/ContactSection'));
-
 export default function Home() {
-  const [activeSection, setActiveSection] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkBackground, setIsDarkBackground] = useState(false);
 
   const aboutRef = useRef(null);
   const portfolioRef = useRef(null);
   const contactRef = useRef(null);
-  const lastScrollY = useRef(0); // To track last scroll position
-  const [scrollDirection, setScrollDirection] = useState(null);
-  const [aboutSectionVisible, setAboutSectionVisible] = useState(false); // Track if the about section is in view
+  const lastScrollY = useRef(0);
+  const [aboutSectionVisible, setAboutSectionVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY.current) {
-        // Scrolling down
-        setScrollDirection("down");
-      } else {
-        // Scrolling up
-        setScrollDirection("up");
-      }
       lastScrollY.current = window.scrollY;
     };
 
@@ -36,47 +22,30 @@ export default function Home() {
       (entries) => {
         entries.forEach((entry) => {
           const target = entry.target;
-
-          // Check if portfolio or contact section is in view
           if (target.id === "portfolio" || target.id === "contact") {
             setIsDarkBackground(entry.isIntersecting);
           }
-
-          // Track if the About section is in view
           if (target.id === "about") {
             setAboutSectionVisible(entry.isIntersecting);
           }
         });
       },
-      { threshold: 0.25 } // Adjusted threshold to make it less sensitive
+      { threshold: 0.25 }
     );
 
-    if (aboutRef.current) {
-      observer.observe(aboutRef.current);
-    }
-    if (portfolioRef.current) {
-      observer.observe(portfolioRef.current);
-    }
-    if (contactRef.current) {
-      observer.observe(contactRef.current);
-    }
+    if (aboutRef.current) observer.observe(aboutRef.current);
+    if (portfolioRef.current) observer.observe(portfolioRef.current);
+    if (contactRef.current) observer.observe(contactRef.current);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (aboutRef.current) {
-        observer.unobserve(aboutRef.current);
-      }
-      if (portfolioRef.current) {
-        observer.unobserve(portfolioRef.current);
-      }
-      if (contactRef.current) {
-        observer.unobserve(contactRef.current);
-      }
+      if (aboutRef.current) observer.unobserve(aboutRef.current);
+      if (portfolioRef.current) observer.unobserve(portfolioRef.current);
+      if (contactRef.current) observer.unobserve(contactRef.current);
     };
-  }, [scrollDirection]);
+  }, []);
 
   const scrollToSection = (section) => {
-    setActiveSection(section);
     setIsMenuOpen(false);
     document.getElementById(section).scrollIntoView({ behavior: "smooth" });
   };
@@ -154,7 +123,6 @@ export default function Home() {
         id="home"
         className="relative flex items-center min-h-screen pt-24 px-8 md:px-16 lg:px-24"
       >
-        {/* Image Background */}
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center"
           style={{
@@ -165,14 +133,10 @@ export default function Home() {
             backgroundRepeat: "no-repeat",
           }}
         ></div>
-
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
-        {/* Left Content - Text Section */}
         <div className="relative z-10 text-white max-w-2xl">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Hi, I'm Humphrey
+            Hi, I&apos;m Humphrey
           </h1>
           <p className="text-lg md:text-2xl mb-6 animate-fade-in delay-200">
             A passionate front-end developer crafting amazing user experiences
@@ -185,14 +149,12 @@ export default function Home() {
             View My Work
           </a>
         </div>
-
-        {/* Right Floating Call-To-Action */}
         <div className="hidden md:block absolute right-12 bottom-12 z-10">
           <a
             href="#contact"
             className="bg-white text-black font-semibold px-5 py-3 text-lg rounded-full shadow-lg hover:bg-gray-300 transition-all duration-300"
           >
-            Let's Connect
+            Let&apos;s Connect
           </a>
         </div>
       </section>
@@ -234,9 +196,7 @@ export default function Home() {
         className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-16"
       >
         <h2 className="text-4xl font-bold text-gray-600 mb-12">Portfolio</h2>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-8">
-          {/* Card 1 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://plus.unsplash.com/premium_photo-1663047707111-c022dee3abe7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVhbHxlbnwwfHwwfHx8MA%3D%3D"
@@ -262,7 +222,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Card 2 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXJ0fGVufDB8fDB8fHww0"
@@ -271,11 +230,11 @@ export default function Home() {
             />
             <div className="p-6">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Project Two | <i>artwork Site</i>
+                Project Two | <i>Artwork Site</i>
               </h3>
               <p className="text-gray-600 mb-6">
                 A gallery website that showcases various artworks, providing an
-                interactive experience for art enthusiasts to explore and enjoy
+                interactive experience for art enthusiasts to explore and enjoy.
               </p>
               <a
                 href="https://artwork-kappa.vercel.app/"
@@ -286,7 +245,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Card 3 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="https://plus.unsplash.com/premium_photo-1682147208772-c4ae4db3ab7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG11c2ljJTIwYXJ0fGVufDB8fDB8fHww"
@@ -295,13 +253,12 @@ export default function Home() {
             />
             <div className="p-6">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-                Project Three | <i>Dreamsters site</i>
+                Project Three | <i>Dreamsters Site</i>
               </h3>
               <p className="text-gray-600 mb-6">
                 A music streaming platform that allows users to discover, listen
-                to, and share their favorite tracks. Built with a focus on user
-                experience, this project integrates with various music APIs to
-                provide a seamless and enjoyable listening experience.
+                to, and share their favorite tracks, integrating with various
+                music APIs for a seamless listening experience.
               </p>
               <a
                 href="https://dreamsters.netlify.app"
@@ -312,11 +269,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Card 4 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
               src="/comingsoon.jpg"
-              alt="Project 4"
+              alt="Coming Soon"
               className="w-full h-56 object-cover"
             />
             <div className="p-6">
@@ -328,117 +284,33 @@ export default function Home() {
                 skills, featuring an interactive design and a smooth user
                 experience.
               </p>
-              <a
-                href="/comingsoon.jpg"
-                className="inline-block bg-black text-white font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-all"
-              >
-                View Project
-              </a>
+              <span className="inline-block bg-gray-300 text-gray-600 font-semibold px-4 py-2 rounded-lg">
+                Coming Soon
+              </span>
             </div>
-          </div>
-
-          {/* Card 5 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            {/* Main Content */}
-      <main className="flex-grow">
-        {/* Home Section */}
-        <section id="home" className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">Welcome to My Portfolio</h1>
-            <p className="text-xl mb-8">Web Developer & Designer</p>
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={() => scrollToSection("about")}
-                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                About Me
-              </button>
-              <button
-                onClick={() => scrollToSection("portfolio")}
-                className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-              >
-                Portfolio
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
-              >
-                Contact
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* Lazy loaded sections */}
-        <Suspense fallback={<div className="py-20">Loading...</div>}>
-          <AboutSection aboutRef={aboutRef} />
-        </Suspense>
-        <Suspense fallback={<div className="py-20">Loading...</div>}>
-          <PortfolioSection portfolioRef={portfolioRef} />
-        </Suspense>
-        <Suspense fallback={<div className="py-20">Loading...</div>}>
-          <ContactSection contactRef={contactRef} />
-        </Suspense>
-      </main>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
-          <div className="fixed right-0 top-0 w-full md:w-64 h-full bg-white shadow-lg z-50 p-6">
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="absolute top-4 right-4"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            <nav className="mt-8">
-              <button
-                onClick={() => scrollToSection("home")}
-                className="block w-full text-left py-2 px-4 hover:bg-gray-100 rounded"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="block w-full text-left py-2 px-4 hover:bg-gray-100 rounded"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("portfolio")}
-                className="block w-full text-left py-2 px-4 hover:bg-gray-100 rounded"
-              >
-                Portfolio
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="block w-full text-left py-2 px-4 hover:bg-gray-100 rounded"
-              >
-                Contact
-              </button>
-            </nav>
           </div>
         </div>
-      )}
-    </div>
-  </div>
-</section>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" ref={contactRef} className="flex flex-col items-center justify-center py-24 px-8 md:px-16 lg:px-24">
+        <h2 className="text-4xl font-bold text-white mb-4">Get In Touch</h2>
+        <p className="text-lg text-gray-300 mb-10 text-center max-w-xl">
+          Have a project in mind or just want to say hi? My inbox is always
+          open.
+        </p>
+        <a
+          href="mailto:amphreyomosh2001@gmail.com"
+          className="bg-white text-black font-semibold px-8 py-4 text-lg rounded-lg shadow-lg hover:bg-gray-300 transition-all duration-300"
+        >
+          Say Hello
+        </a>
+      </section>
 
       {/* Footer */}
       <footer id="footer" className="bg-black text-white py-6 text-center">
-        <p>&copy; 2026 Harmo. All rights reserved.</p>
+        <p>&copy; 2025 Harmo. All rights reserved.</p>
       </footer>
     </div>
-  )}
+  );
+}
