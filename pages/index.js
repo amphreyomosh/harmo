@@ -370,7 +370,7 @@ export default function Home() {
             <h1 className="font-fraunces text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-5 [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
               Your Idea, Built and Launched Properly.
             </h1>
-            <p className="font-poppins text-sm sm:text-base md:text-xl text-gray-100 mb-8 max-w-md leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
+            <p className="font-poppins text-base sm:text-lg md:text-xl text-gray-100 mb-8 max-w-md leading-relaxed [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]">
               Frontend development and design for founders who care about quality.
             </p>
             <a
@@ -474,13 +474,13 @@ export default function Home() {
               <h2 className="font-fraunces text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Creating Impact Through<br />Technology and Education.
               </h2>
-              <p className="text-gray-300 text-base leading-relaxed mb-4">
+              <p className="text-gray-300 text-lg leading-relaxed mb-4">
                 Technology has always been more than code and tools to me. What excites me most is helping people understand how technology can solve real problems and create new opportunities. Over the years, I have focused on exploring Artificial Intelligence, web development, user experience, and digital innovation — constantly looking for practical ways to turn complex ideas into simple solutions.
               </p>
-              <p className="text-gray-300 text-base leading-relaxed mb-4">
+              <p className="text-gray-300 text-lg leading-relaxed mb-4">
                 My work combines technology and education. I enjoy training students, guiding beginners, and designing learning experiences that make AI and digital skills accessible to everyone. Whether I&apos;m leading a workshop, building a project, or experimenting with new tools, my goal is always the same: to transform knowledge into something useful, actionable, and impactful.
               </p>
-              <p className="text-gray-300 text-base leading-relaxed mb-8">
+              <p className="text-gray-300 text-lg leading-relaxed mb-8">
                 I believe the future belongs to people who can learn, adapt, and work alongside emerging technologies. That belief drives me to keep learning, building, and sharing what I discover. When I&apos;m not building or teaching, you&apos;ll find me exploring new AI tools and searching for better ways to bridge the gap between technology and human potential.
               </p>
               <div className="flex flex-wrap gap-2">
@@ -575,10 +575,10 @@ export default function Home() {
               <h3 className="font-fraunces text-3xl md:text-4xl font-bold text-white mb-5 leading-tight">
                 Building, Teaching,<br />Repeating.
               </h3>
-              <p className="text-gray-300 text-base leading-relaxed mb-4">
+              <p className="text-gray-300 text-lg leading-relaxed mb-4">
                 Every project begins with a question: what does success look like for you? That question shapes everything — the design choices, the tools, the way I train or build. There are no shortcuts when quality is the standard.
               </p>
-              <p className="text-gray-300 text-base leading-relaxed mb-8">
+              <p className="text-gray-300 text-lg leading-relaxed mb-8">
                 From workshops and training sessions to live websites and design systems, I&apos;ve spent years working at the intersection of building and teaching. These images capture moments from that ongoing journey — proof that great work is rarely finished; it just keeps evolving.
               </p>
 
@@ -617,7 +617,7 @@ export default function Home() {
           <h2 className={`font-fraunces text-4xl md:text-5xl font-bold text-gray-900 mb-3 transition-all duration-700 delay-100 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             Selected Projects.
           </h2>
-          <p className={`text-gray-500 text-base mb-10 max-w-lg transition-all duration-700 delay-150 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <p className={`text-gray-500 text-lg mb-10 max-w-lg transition-all duration-700 delay-150 ${projectsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             From fully functional live websites to polished design mockups — here's what I've been building.
           </p>
 
@@ -644,7 +644,7 @@ export default function Home() {
                 <div className="p-6">
                   <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-1">{project.label}</p>
                   <h3 className="font-fraunces text-xl font-bold text-gray-900 mb-2 leading-snug">{project.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-5">{project.description}</p>
+                  <p className="text-gray-500 text-base leading-relaxed mb-5">{project.description}</p>
 
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex gap-2 flex-wrap">
@@ -765,7 +765,7 @@ export default function Home() {
               <h2 className="font-fraunces text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Let's Build Something<br />Great Together.
               </h2>
-              <p className="text-gray-300 text-base leading-relaxed mb-8 max-w-md">
+              <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-md">
                 Have a project in mind or want to collaborate? I'd love to hear about your idea and how we can bring it to life with quality and intention.
               </p>
               <a
