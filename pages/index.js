@@ -16,6 +16,8 @@ const websiteProjects = [
     title: "Meal Site",
     description:
       "A web application that allows users to search for recipes based on ingredients, dietary restrictions, and meal types — with save and shopping list features.",
+    story:
+      "The Meal Site was built to solve a real problem — helping people plan meals without the overwhelm of scrolling through thousands of recipes. The idea came from a personal frustration with meal planning apps that were either too complex or too limiting. Built with React and a public recipe API, it lets users filter by ingredients they already have, dietary needs, and meal type, then save favourites and auto-generate a shopping list. The goal was to make healthy eating feel effortless, not like a chore.",
     image:
       "https://plus.unsplash.com/premium_photo-1663047707111-c022dee3abe7?w=800&auto=format&fit=crop&q=60",
     link: "https://mealsite.netlify.app/",
@@ -27,6 +29,8 @@ const websiteProjects = [
     title: "Artwork Site",
     description:
       "A gallery website that showcases various artworks, providing an interactive experience for art enthusiasts to explore and enjoy.",
+    story:
+      "The Artwork Site was created to give emerging artists a clean, minimal space to showcase their work without the noise of commercial platforms. The design philosophy was simple: let the art speak. Built on Next.js and deployed on Vercel, the gallery features smooth transitions, category filtering, and a layout that adapts beautifully to any screen size. Every pixel was intentional — no clutter, no distractions, just the work.",
     image:
       "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&auto=format&fit=crop&q=60",
     link: "https://artwork-kappa.vercel.app/",
@@ -38,6 +42,8 @@ const websiteProjects = [
     title: "Dreamsters Site",
     description:
       "A music streaming platform for discovering, listening to, and sharing favorite tracks, with seamless music API integrations.",
+    story:
+      "Dreamsters started as a passion project for music lovers who wanted discovery without algorithms deciding what they hear. The concept was to create a streaming experience that felt more like flipping through a record store than being fed suggestions. Integrating multiple music APIs, the platform lets users browse, listen, and share tracks in a clean, immersive interface. It was a lesson in balancing performance with aesthetics — and in building something you'd actually want to use yourself.",
     image:
       "https://plus.unsplash.com/premium_photo-1682147208772-c4ae4db3ab7e?w=800&auto=format&fit=crop&q=60",
     link: "https://dreamsters.netlify.app",
@@ -49,6 +55,8 @@ const websiteProjects = [
     title: "Coming Soon",
     description:
       "A responsive portfolio website showcasing web development skills with an interactive design and smooth user experience.",
+    story:
+      "This project is currently in development. It will push the boundaries of what a portfolio website can feel like — combining interactive design, smooth animations, and a user experience that tells a story from the first scroll to the last. More details coming soon.",
     image: "/comingsoon.jpg",
     link: null,
     tech: ["TBA"],
@@ -186,6 +194,7 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [mockupCanScrollLeft, setMockupCanScrollLeft] = useState(false);
   const [mockupCanScrollRight, setMockupCanScrollRight] = useState(true);
+  const [activeProject, setActiveProject] = useState(null);
   const [aboutSlide, setAboutSlide] = useState(0);
   const [aboutVisible, setAboutVisible] = useState(false);
   const [aboutRow2Visible, setAboutRow2Visible] = useState(false);
@@ -240,6 +249,12 @@ export default function Home() {
     startAutoPlay();
     return stopAutoPlay;
   }, [startAutoPlay, stopAutoPlay]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = activeProject ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [activeProject]);
 
   // About section slideshow auto-advance
   useEffect(() => {
@@ -646,18 +661,19 @@ export default function Home() {
                   <h3 className="font-fraunces text-xl font-bold text-gray-900 mb-2 leading-snug">{project.title}</h3>
                   <p className="text-gray-500 text-base leading-relaxed mb-5">{project.description}</p>
 
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex gap-2 flex-wrap">
-                      {project.tech.map((t) => (
-                        <span key={t} className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">{t}</span>
-                      ))}
-                    </div>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setActiveProject(project)}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-black border border-gray-200 px-4 py-2 rounded-full hover:bg-black hover:text-white hover:border-black transition-all duration-200"
+                    >
+                      About
+                    </button>
                     {project.link ? (
                       <a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-black border border-gray-200 px-4 py-2 rounded-full hover:bg-black hover:text-white hover:border-black transition-all duration-200 flex-shrink-0"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-black border border-gray-200 px-4 py-2 rounded-full hover:bg-black hover:text-white hover:border-black transition-all duration-200"
                       >
                         View Live
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -665,7 +681,7 @@ export default function Home() {
                         </svg>
                       </a>
                     ) : (
-                      <span className="text-xs text-gray-400 flex-shrink-0">Coming Soon</span>
+                      <span className="text-xs text-gray-400">Coming Soon</span>
                     )}
                   </div>
                 </div>
@@ -802,6 +818,74 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── Project About Modal ────────────────────────────────────────────── */}
+      {activeProject && (
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] flex items-center justify-center p-4"
+          onClick={() => setActiveProject(null)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl animate-modal-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Image */}
+            <div className="relative h-52 overflow-hidden">
+              <img
+                src={activeProject.image}
+                alt={activeProject.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <button
+                onClick={() => setActiveProject(null)}
+                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black transition-colors text-lg leading-none"
+              >
+                &times;
+              </button>
+              <span className="absolute bottom-3 left-4 text-white text-[10px] font-bold uppercase tracking-widest opacity-80">
+                {activeProject.label}
+              </span>
+            </div>
+
+            {/* Content */}
+            <div className="p-6">
+              <h3 className="font-fraunces text-2xl font-bold text-gray-900 mb-3">
+                {activeProject.title}
+              </h3>
+              <p className="text-gray-600 text-base leading-relaxed mb-5">
+                {activeProject.story}
+              </p>
+
+              {/* Tech tags */}
+              <div className="flex gap-2 flex-wrap mb-6">
+                {activeProject.tech.map((t) => (
+                  <span key={t} className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* CTA */}
+              {activeProject.link ? (
+                <a
+                  href={activeProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-black text-white font-semibold px-6 py-3 rounded-full text-sm hover:bg-gray-800 transition-all duration-200"
+                >
+                  View Live Site
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              ) : (
+                <span className="text-sm text-gray-400 font-medium">Coming Soon</span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Footer ─────────────────────────────────────────────────────────── */}
       <footer className="bg-black text-white py-6 text-center">
